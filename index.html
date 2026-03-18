@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escola Paraná</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- TELA INICIAL -->
+<div class="container" id="home">
+  <div class="logo">e.</div>
+  <h1>escola<br><span>PARANÁ</span></h1>
+
+  <div class="card" onclick="abrirLogin('Aluno')">
+    <div class="icon">👨‍🎓</div>
+    <p>sou aluno(a)</p>
+  </div>
+
+  <div class="card" onclick="abrirLogin('Responsável')">
+    <div class="icon">👨‍👩‍👧</div>
+    <p>sou responsável</p>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div class="container hidden" id="login">
+  <h2 id="tituloLogin"></h2>
+
+  <input type="text" placeholder="CGM ou CPF">
+  <input type="text" placeholder="Celular">
+
+  <button onclick="entrar()">Enviar código de segurança</button>
+
+  <p class="link">Já tenho o código</p>
+
+  <button class="voltar" onclick="voltar()">⬅ Voltar</button>
+</div>
+
+<!-- MENU -->
+<div class="container hidden" id="menu">
+  <h2>Menu</h2>
+
+  <div class="grid">
+    <div class="item">🏠<span>Início</span></div>
+    <div class="item">📊<span>Grade</span></div>
+    <div class="item">📝<span>Notas</span></div>
+    <div class="item">📅<span>Frequência</span></div>
+    <div class="item">📆<span>Agenda</span></div>
+    <div class="item">🔔<span>Avisos</span></div>
+  </div>
+
+  <button class="sair" onclick="sair()">Sair</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
