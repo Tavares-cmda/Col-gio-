@@ -143,3 +143,8 @@ button{
 .hidden{
   display:none;
 }
+.btn-entrar{
+  margin-top:15px;
+  background:#00c851; /* verde bonito */
+  font-weight:bold;
+}
