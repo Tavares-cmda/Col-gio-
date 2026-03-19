@@ -7,109 +7,75 @@
 
 body{
   background: linear-gradient(135deg, #0a3d91, #3c91e6);
-  height:100vh;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+.header{
+  text-align:center;
+  color:white;
+  padding:30px 20px;
+}
+
+.header h1{
+  font-size:28px;
+}
+
+.header h2{
+  font-size:16px;
+  margin-top:5px;
+}
+
+.header p{
+  font-size:14px;
+  margin-top:10px;
+  font-style:italic;
+}
+
+.container{
+  flex:1;
   display:flex;
   justify-content:center;
   align-items:center;
 }
 
-.container{
-  width:320px;
-  height:600px;
-  background:linear-gradient(180deg, #1e5bb8, #3c91e6);
-  border-radius:20px;
-  padding:20px;
-  color:white;
-  text-align:center;
-  box-shadow:0 10px 25px rgba(0,0,0,0.3);
-  overflow:hidden;
-}
-
-.topo-escola{
-  width:calc(100% + 40px);
-  background:#082c6c;
-  margin:-20px -20px 20px -20px;
-  padding:15px 10px;
-  text-align:center;
-}
-
-.topo-escola h1{
-  font-size:24px;
-  font-weight:800;
-  text-transform:uppercase;
-  text-shadow: 0 3px 8px rgba(0,0,0,0.4);
-}
-
-.topo-escola p{
-  font-size:12px;
-  margin-top:5px;
-  font-style:italic;
-}
-
-.logo{
-  font-size:50px;
-  margin-top:10px;
-}
-
-.titulo-app{
-  margin-bottom:30px;
-}
-
 .card{
   background:white;
-  color:#0a3d91;
-  padding:20px;
+  padding:30px;
   border-radius:15px;
-  margin:15px 0;
-  cursor:pointer;
-}
-
-input{
-  width:100%;
-  padding:12px;
-  margin:10px 0;
-  border-radius:10px;
-  border:none;
+  width:300px;
+  text-align:center;
+  box-shadow:0 10px 20px rgba(0,0,0,0.2);
 }
 
 button{
   width:100%;
   padding:12px;
-  border-radius:20px;
-  border:none;
   margin-top:10px;
-  background:#00a8ff;
-  color:white;
-}
-
-.btn-entrar{
-  background:#00c851;
-  opacity:0.5;
-}
-
-.btn-entrar.ativo{
-  opacity:1;
-}
-
-.voltar{
-  background:transparent;
-  border:1px solid white;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  margin-top:20px;
-}
-
-.item{
-  background:white;
-  color:#0a3d91;
-  padding:15px;
+  border:none;
   border-radius:10px;
+  background:#0a3d91;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
 }
 
-.hidden{
-  display:none;
+button:hover{
+  background:#3c91e6;
+}
+
+input{
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+
+.footer{
+  text-align:center;
+  color:white;
+  padding:10px;
+  font-size:12px;
 }
