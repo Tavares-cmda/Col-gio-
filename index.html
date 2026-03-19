@@ -68,13 +68,14 @@
   <input id="cpf" type="text" placeholder="CGM ou CPF" oninput="validarCampos()">
   <input id="celular" type="text" placeholder="Celular" oninput="validarCampos()">
 
-  <button onclick="enviarCodigo()">Enviar código</button>
+  <!-- BOTÃO ENTRAR -->
+  <button id="btnEntrar" class="btn-entrar" onclick="entrar()" disabled>
+    Entrar
+  </button>
 
-  <button id="btnEntrar" class="btn-entrar" onclick="entrar()" disabled>Entrar</button>
-
-  <button class="voltar" onclick="voltarHome()">Voltar</button>
+  <button class="voltar" onclick="voltarHome()">⬅ Voltar</button>
 </div>
-
+  
 <!-- MENU -->
 <div class="container hidden" id="menu">
   <h2>Menu</h2>
