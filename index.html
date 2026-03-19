@@ -8,7 +8,39 @@
 </head>
 <body>
 
-<div class="container" id="home">
+<!-- TELA INICIAL NOVA -->
+<div class="container" id="inicio">
+  <h2>Bem-vindo</h2>
+
+  <button onclick="irLogin()">Login</button>
+  <button onclick="irRegistro()">Registrar</button>
+</div>
+
+<!-- REGISTRO -->
+<div class="container hidden" id="registro">
+  <h2>Registro</h2>
+
+  <input id="emailReg" type="text" placeholder="Email @escola.pr.gov.br">
+  <input id="senhaReg" type="password" placeholder="Senha">
+  <input id="confSenha" type="password" placeholder="Confirmar senha">
+
+  <button onclick="registrar()">Registrar</button>
+  <button class="voltar" onclick="voltarInicio()">Voltar</button>
+</div>
+
+<!-- LOGIN -->
+<div class="container hidden" id="loginEmail">
+  <h2>Login</h2>
+
+  <input id="emailLogin" type="text" placeholder="Email">
+  <input id="senhaLogin" type="password" placeholder="Senha">
+
+  <button onclick="login()">Entrar</button>
+  <button class="voltar" onclick="voltarInicio()">Voltar</button>
+</div>
+
+<!-- SUA TELA ANTIGA -->
+<div class="container hidden" id="home">
 
   <div class="topo-escola">
     <h1>São Cristóvão - EFMP</h1>
@@ -29,37 +61,29 @@
   </div>
 </div>
 
-<!-- LOGIN -->
+<!-- LOGIN CPF -->
 <div class="container hidden" id="login">
   <h2 id="tituloLogin">Login</h2>
 
   <input id="cpf" type="text" placeholder="CGM ou CPF" oninput="validarCampos()">
   <input id="celular" type="text" placeholder="Celular" oninput="validarCampos()">
 
-  <button onclick="enviarCodigo()">Enviar código de segurança</button>
+  <button onclick="enviarCodigo()">Enviar código</button>
 
-  <p class="link">Já tenho o código</p>
-
-  <!-- BOTÃO ENTRAR CONTROLADO -->
   <button id="btnEntrar" class="btn-entrar" onclick="entrar()" disabled>Entrar</button>
 
-  <button class="voltar" onclick="voltar()">⬅ Voltar</button>
+  <button class="voltar" onclick="voltarHome()">Voltar</button>
 </div>
 
 <!-- MENU -->
 <div class="container hidden" id="menu">
   <h2>Menu</h2>
-
   <div class="grid">
     <div class="item">🏠<span>Início</span></div>
     <div class="item">📊<span>Grade</span></div>
     <div class="item">📝<span>Notas</span></div>
-    <div class="item">📅<span>Frequência</span></div>
-    <div class="item">📆<span>Agenda</span></div>
-    <div class="item">🔔<span>Avisos</span></div>
   </div>
-
-  <button class="sair" onclick="sair()">Sair</button>
+  <button onclick="sair()">Sair</button>
 </div>
 
 <script src="script.js"></script>
