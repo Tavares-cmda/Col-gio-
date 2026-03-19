@@ -8,10 +8,8 @@
 </head>
 <body>
 
-<!-- TELA INICIAL -->
 <div class="container" id="home">
 
-  <!-- CABEÇALHO -->
   <div class="topo-escola">
     <h1>São Cristóvão - EFMP</h1>
     <p>Educar é o nosso compromisso; inspirar é a nossa paixão.</p>
@@ -35,15 +33,15 @@
 <div class="container hidden" id="login">
   <h2 id="tituloLogin">Login</h2>
 
-  <input type="text" placeholder="CGM ou CPF">
-  <input type="text" placeholder="Celular">
+  <input id="cpf" type="text" placeholder="CGM ou CPF" oninput="validarCampos()">
+  <input id="celular" type="text" placeholder="Celular" oninput="validarCampos()">
 
-  <button onclick="entrar()">Enviar código de segurança</button>
+  <button onclick="enviarCodigo()">Enviar código de segurança</button>
 
   <p class="link">Já tenho o código</p>
 
-  <!-- BOTÃO ENTRAR (NOVO) -->
-  <button class="btn-entrar" onclick="entrar()">Entrar</button>
+  <!-- BOTÃO ENTRAR CONTROLADO -->
+  <button id="btnEntrar" class="btn-entrar" onclick="entrar()" disabled>Entrar</button>
 
   <button class="voltar" onclick="voltar()">⬅ Voltar</button>
 </div>
