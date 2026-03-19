@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Escola Paraná</title>
+  <title>Colégio São Cristóvão</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,52 +12,98 @@
 <div class="container" id="home">
 
   <div class="topo-escola">
-    <h1>São Cristóvão - EFMP</h1>
+    <h1>Colégio Estadual São Cristóvão</h1>
+    <h3>Fundado em 1978</h3>
     <p>Educar é o nosso compromisso; inspirar é a nossa paixão.</p>
   </div>
 
   <div class="logo">e.</div>
-  <h1 class="titulo-app">escola<br><span>PARANÁ</span></h1>
+
+  <h1 class="titulo-app">
+    escola<br><span>PARANÁ</span>
+  </h1>
+
+  <div class="subtitulo">
+    Escolha como deseja acessar
+  </div>
 
   <div class="card" onclick="abrirLogin('Aluno')">
     <div class="icon">👨‍🎓</div>
-    <p>sou aluno(a)</p>
+    <p>Sou aluno(a)</p>
   </div>
 
   <div class="card" onclick="abrirLogin('Responsável')">
     <div class="icon">👨‍👩‍👧</div>
-    <p>sou responsável</p>
+    <p>Sou responsável</p>
   </div>
+
 </div>
 
 <!-- LOGIN -->
 <div class="container hidden" id="login">
-  <h2 id="tituloLogin">Login</h2>
 
-  <input id="cpf" type="text" placeholder="CGM ou CPF" oninput="validarCampos()">
-  <input id="celular" type="text" placeholder="Celular" oninput="validarCampos()">
+  <div class="topo-login">
+    <h2 id="tituloLogin">Login</h2>
+    <p>Digite seus dados para continuar</p>
+  </div>
+
+  <div class="form">
+    <input id="cpf" type="text" placeholder="CGM ou CPF" oninput="validarCampos()">
+    <input id="celular" type="text" placeholder="Celular" oninput="validarCampos()">
+  </div>
 
   <button id="btnEntrar" class="btn-entrar" onclick="entrar()" disabled>
     Entrar
   </button>
 
   <button class="voltar" onclick="voltarHome()">⬅ Voltar</button>
+
 </div>
 
 <!-- MENU -->
 <div class="container hidden" id="menu">
-  <h2>Menu</h2>
+
+  <div class="topo-menu">
+    <h2>Menu Principal</h2>
+    <p>Bem-vindo ao sistema escolar</p>
+  </div>
 
   <div class="grid">
-    <div class="item">🏠<span>Início</span></div>
-    <div class="item">📊<span>Grade</span></div>
-    <div class="item">📝<span>Notas</span></div>
-    <div class="item">📅<span>Frequência</span></div>
-    <div class="item">📆<span>Agenda</span></div>
-    <div class="item">🔔<span>Avisos</span></div>
+
+    <div class="item">
+      🏠
+      <span>Início</span>
+    </div>
+
+    <div class="item">
+      📊
+      <span>Grade</span>
+    </div>
+
+    <div class="item">
+      📝
+      <span>Notas</span>
+    </div>
+
+    <div class="item">
+      📅
+      <span>Frequência</span>
+    </div>
+
+    <div class="item">
+      📆
+      <span>Agenda</span>
+    </div>
+
+    <div class="item">
+      🔔
+      <span>Avisos</span>
+    </div>
+
   </div>
 
   <button class="sair" onclick="sair()">Sair</button>
+
 </div>
 
 <script src="script.js"></script>
