@@ -145,14 +145,16 @@ button{
 }
 .btn-entrar{
   margin-top:15px;
-  background:#00c851; /* verde bonito */
-  font-weight:bold;
-}
-.btn-entrar{
-  margin-top:15px;
   background:#00c851;
   font-weight:bold;
   opacity:0.5;
+}
+
+/* quando ativado */
+.btn-entrar.ativo{
+  opacity:1;
+  cursor:pointer;
+}y:0.5;
 }
 
 /* quando ativado */
