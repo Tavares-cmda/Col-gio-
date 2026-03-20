@@ -1,105 +1,78 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Colégio São Cristóvão</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colégio São Cristóvão</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- TELA INICIAL -->
-<div class="container" id="home">
+<!-- TOPO -->
+<div class="topo">
+  <h1>Colégio Estadual São Cristóvão</h1>
+  <h3>Fundado em 1978</h3>
+  <p>Educar é o nosso compromisso; inspirar é a nossa paixão.</p>
+</div>
 
-  <div class="topo-escola">
-    <h1>Colégio Estadual São Cristóvão</h1>
-    <h3>Fundado em 1978</h3>
-    <p>Educar é o nosso compromisso; inspirar é a nossa paixão.</p>
-  </div>
+<!-- TELA INICIAL -->
+<div class="container" id="inicio">
 
   <div class="logo">e.</div>
+  <h2 class="titulo">escola <span>PARANÁ</span></h2>
 
-  <h1 class="titulo-app">
-    escola<br><span>PARANÁ</span>
-  </h1>
+  <button class="btn" onclick="irPara('tipo')">Fazer Login</button>
+  <button class="btn-outline" onclick="irPara('tipo')">Registrar</button>
 
-  <div class="subtitulo">
-    Escolha como deseja acessar
-  </div>
+</div>
+
+<!-- ESCOLHA -->
+<div class="container hidden" id="tipo">
+
+  <h2>Como deseja acessar?</h2>
 
   <div class="card" onclick="abrirLogin('Aluno')">
-    <div class="icon">👨‍🎓</div>
-    <p>Sou aluno(a)</p>
+    👨‍🎓
+    <p>Sou aluno</p>
   </div>
 
   <div class="card" onclick="abrirLogin('Responsável')">
-    <div class="icon">👨‍👩‍👧</div>
+    👨‍👩‍👧
     <p>Sou responsável</p>
   </div>
+
+  <button class="voltar" onclick="voltar('inicio')">⬅ Voltar</button>
 
 </div>
 
 <!-- LOGIN -->
 <div class="container hidden" id="login">
 
-  <div class="topo-login">
-    <h2 id="tituloLogin">Login</h2>
-    <p>Digite seus dados para continuar</p>
-  </div>
+  <h2 id="tituloLogin">Login</h2>
 
-  <div class="form">
-    <input id="cpf" type="text" placeholder="CGM ou CPF" oninput="validarCampos()">
-    <input id="celular" type="text" placeholder="Celular" oninput="validarCampos()">
-  </div>
+  <input id="cpf" type="text" placeholder="CGM ou CPF" oninput="validar()">
+  <input id="celular" type="text" placeholder="Celular" oninput="validar()">
 
-  <button id="btnEntrar" class="btn-entrar" onclick="entrar()" disabled>
+  <button id="entrar" class="btn" onclick="entrar()" disabled>
     Entrar
   </button>
 
-  <button class="voltar" onclick="voltarHome()">⬅ Voltar</button>
+  <button class="voltar" onclick="voltar('tipo')">⬅ Voltar</button>
 
 </div>
 
 <!-- MENU -->
 <div class="container hidden" id="menu">
 
-  <div class="topo-menu">
-    <h2>Menu Principal</h2>
-    <p>Bem-vindo ao sistema escolar</p>
-  </div>
+  <h2>Menu</h2>
 
   <div class="grid">
-
-    <div class="item">
-      🏠
-      <span>Início</span>
-    </div>
-
-    <div class="item">
-      📊
-      <span>Grade</span>
-    </div>
-
-    <div class="item">
-      📝
-      <span>Notas</span>
-    </div>
-
-    <div class="item">
-      📅
-      <span>Frequência</span>
-    </div>
-
-    <div class="item">
-      📆
-      <span>Agenda</span>
-    </div>
-
-    <div class="item">
-      🔔
-      <span>Avisos</span>
-    </div>
-
+    <div class="item">🏠<span>Início</span></div>
+    <div class="item">📊<span>Grade</span></div>
+    <div class="item">📝<span>Notas</span></div>
+    <div class="item">📅<span>Frequência</span></div>
+    <div class="item">📆<span>Agenda</span></div>
+    <div class="item">🔔<span>Avisos</span></div>
   </div>
 
   <button class="sair" onclick="sair()">Sair</button>
