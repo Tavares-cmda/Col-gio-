@@ -2,80 +2,134 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family:Arial, Helvetica, sans-serif;
 }
 
 body{
-  background: linear-gradient(135deg, #0a3d91, #3c91e6);
+  background: linear-gradient(180deg, #0a3d91, #3c91e6);
   min-height:100vh;
-  display:flex;
-  flex-direction:column;
-}
-
-.header{
-  text-align:center;
   color:white;
-  padding:30px 20px;
 }
 
-.header h1{
-  font-size:28px;
+/* TOPO */
+.topo{
+  text-align:center;
+  padding:20px;
 }
 
-.header h2{
-  font-size:16px;
-  margin-top:5px;
+.topo h1{
+  font-size:18px;
 }
 
-.header p{
+.topo h3{
   font-size:14px;
-  margin-top:10px;
+}
+
+.topo p{
+  font-size:12px;
+  margin-top:5px;
   font-style:italic;
 }
 
+/* CONTAINER */
 .container{
-  flex:1;
   display:flex;
-  justify-content:center;
+  flex-direction:column;
   align-items:center;
+  justify-content:center;
+  margin-top:30px;
 }
 
-.card{
+.hidden{
+  display:none;
+}
+
+/* LOGO */
+.logo{
+  font-size:60px;
   background:white;
-  padding:30px;
-  border-radius:15px;
-  width:300px;
-  text-align:center;
-  box-shadow:0 10px 20px rgba(0,0,0,0.2);
+  color:#0a3d91;
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:15px;
 }
 
-button{
-  width:100%;
+.titulo{
+  font-size:24px;
+}
+
+.titulo span{
+  font-weight:bold;
+}
+
+/* BOTÕES */
+.btn{
+  width:220px;
   padding:12px;
   margin-top:10px;
   border:none;
-  border-radius:10px;
-  background:#0a3d91;
+  border-radius:20px;
+  background:#1ec0ff;
   color:white;
   font-size:16px;
+}
+
+.btn-outline{
+  width:220px;
+  padding:12px;
+  margin-top:10px;
+  border-radius:20px;
+  border:2px solid white;
+  background:transparent;
+  color:white;
+}
+
+/* CARDS */
+.card{
+  width:200px;
+  background:white;
+  color:#0a3d91;
+  padding:20px;
+  border-radius:20px;
+  text-align:center;
+  margin:10px;
+  font-size:20px;
   cursor:pointer;
 }
 
-button:hover{
-  background:#3c91e6;
-}
-
+/* INPUT */
 input{
-  width:100%;
-  padding:10px;
+  width:250px;
+  padding:12px;
   margin-top:10px;
-  border-radius:8px;
-  border:1px solid #ccc;
+  border-radius:20px;
+  border:none;
 }
 
-.footer{
+/* MENU */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:15px;
+  margin-top:20px;
+}
+
+.item{
+  background:white;
+  color:#0a3d91;
+  padding:15px;
+  border-radius:15px;
   text-align:center;
+}
+
+/* BOTÕES EXTRA */
+.voltar, .sair{
+  margin-top:20px;
+  background:none;
+  border:none;
   color:white;
-  padding:10px;
-  font-size:12px;
 }
