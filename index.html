@@ -15,14 +15,14 @@
   <p>Educar é o nosso compromisso; inspirar é a nossa paixão.</p>
 </div>
 
-<!-- TELA INICIAL -->
+<!-- INÍCIO -->
 <div class="container" id="inicio">
 
   <div class="logo">e.</div>
   <h2 class="titulo">escola <span>PARANÁ</span></h2>
 
   <button class="btn" onclick="irPara('tipo')">Fazer Login</button>
-  <button class="btn-outline" onclick="irPara('tipo')">Registrar</button>
+  <button class="btn-outline" onclick="abrirRegistro()">Registrar</button>
 
 </div>
 
@@ -31,12 +31,12 @@
 
   <h2>Como deseja acessar?</h2>
 
-  <div class="card" onclick="abrirLogin('Aluno')">
+  <div class="card" onclick="entrarDireto('Aluno')">
     👨‍🎓
     <p>Sou aluno</p>
   </div>
 
-  <div class="card" onclick="abrirLogin('Responsável')">
+  <div class="card" onclick="entrarDireto('Responsável')">
     👨‍👩‍👧
     <p>Sou responsável</p>
   </div>
@@ -45,26 +45,26 @@
 
 </div>
 
-<!-- LOGIN -->
-<div class="container hidden" id="login">
+<!-- REGISTRO -->
+<div class="container hidden" id="registro">
 
-  <h2 id="tituloLogin">Login</h2>
+  <h2>Registrar</h2>
 
-  <input id="cpf" type="text" placeholder="CGM ou CPF" oninput="validar()">
-  <input id="celular" type="text" placeholder="Celular" oninput="validar()">
+  <input id="email" type="text" placeholder="seuemail@escola.pr.gov.br" oninput="validarRegistro()">
+  <input id="senha" type="password" placeholder="Criar senha" oninput="validarRegistro()">
 
-  <button id="entrar" class="btn" onclick="entrar()" disabled>
-    Entrar
+  <button id="btnRegistrar" class="btn" onclick="registrar()" disabled>
+    Criar Conta
   </button>
 
-  <button class="voltar" onclick="voltar('tipo')">⬅ Voltar</button>
+  <button class="voltar" onclick="voltar('inicio')">⬅ Voltar</button>
 
 </div>
 
 <!-- MENU -->
 <div class="container hidden" id="menu">
 
-  <h2>Menu</h2>
+  <h2 id="tituloMenu">Menu</h2>
 
   <div class="grid">
     <div class="item">🏠<span>Início</span></div>
