@@ -1,30 +1,30 @@
-let tipoUsuario = "";
+let tipo = "";
 
-function abrirLogin(tipo){
-  tipoUsuario = tipo;
+function irPara(tela){
+  document.getElementById("inicio").classList.add("hidden");
+  document.getElementById(tela).classList.remove("hidden");
+}
 
-  document.getElementById("home").classList.add("hidden");
+function voltar(tela){
+  document.getElementById("tipo").classList.add("hidden");
+  document.getElementById("login").classList.add("hidden");
+  document.getElementById(tela).classList.remove("hidden");
+}
+
+function abrirLogin(t){
+  tipo = t;
+
+  document.getElementById("tipo").classList.add("hidden");
   document.getElementById("login").classList.remove("hidden");
 
-  document.getElementById("tituloLogin").innerText = "Login - " + tipo;
+  document.getElementById("tituloLogin").innerText = "Login - " + t;
 }
 
-function voltarHome(){
-  document.getElementById("login").classList.add("hidden");
-  document.getElementById("home").classList.remove("hidden");
-}
-
-function validarCampos(){
+function validar(){
   let cpf = document.getElementById("cpf").value;
-  let celular = document.getElementById("celular").value;
+  let cel = document.getElementById("celular").value;
 
-  let botao = document.getElementById("btnEntrar");
-
-  if(cpf.length > 3 && celular.length > 7){
-    botao.disabled = false;
-  } else {
-    botao.disabled = true;
-  }
+  document.getElementById("entrar").disabled = !(cpf.length > 3 && cel.length > 7);
 }
 
 function entrar(){
@@ -34,9 +34,5 @@ function entrar(){
 
 function sair(){
   document.getElementById("menu").classList.add("hidden");
-  document.getElementById("home").classList.remove("hidden");
-
-  document.getElementById("cpf").value = "";
-  document.getElementById("celular").value = "";
-  document.getElementById("btnEntrar").disabled = true;
+  document.getElementById("inicio").classList.remove("hidden");
 }
