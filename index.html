@@ -8,35 +8,37 @@
 </head>
 <body>
 
-  <!-- Tela Splash (5 segundos) -->
+  <!-- Splash -->
   <div id="splash" class="screen active">
     <div class="splash-content">
-      <img src="images/logo-escola.png" alt="Logo Colégio São Cristóvão" id="logo-splash"/>
+      <img src="images/logo-escola.png" alt="Logo" id="logo-splash" />
       <h1>Colégio Estadual São Cristóvão</h1>
       <h3>Fundado em 1978</h3>
       <p>Educar é o nosso compromisso; inspirar é a nossa paixão.</p>
     </div>
   </div>
 
-  <!-- Tela de Login / Registro -->
+  <!-- Auth (Login/Registro) -->
   <div id="auth" class="screen">
     <div class="auth-container">
       <div class="logo">e.</div>
       <h2 class="titulo">escola <span>PARANÁ</span></h2>
       <h3>Colégio Estadual São Cristóvão</h3>
-      <form id="authForm">
-        <input type="email" id="email" placeholder="seuemail@escola.pr.gov.br" required/>
-        <input type="password" id="senha" placeholder="Senha" required/>
-        <button type="submit" id="btnEntrar">Entrar</button>
-        <button type="button" id="btnRegistrar">Registrar</button>
-      </form>
-      <p id="msgAuth"></p>
-      <button class="voltar" onclick="voltar('splash')">⬅ Voltar</button>
+      
+      <input type="email" id="email" placeholder="seuemail@escola.pr.gov.br" required />
+      <input type="password" id="senha" placeholder="Senha" required />
+      
+      <button id="btnEntrar" class="btn">Entrar</button>
+      <button id="btnRegistrar" class="btn-outline">Registrar</button>
+      
+      <p id="msgAuth" style="color: red; margin-top: 10px;"></p>
+      
+      <button class="voltar" onclick="showScreen('splash')">⬅ Voltar</button>
     </div>
   </div>
 
-  <!-- Escolha Aluno ou Responsável -->
-  <div id="role" class="screen">
+  <!-- Escolha de tipo (Aluno / Responsável) -->
+  <div id="tipo" class="screen">
     <h2>Como deseja acessar?</h2>
     <div class="card" onclick="setRole('aluno')">
       👨‍🎓<br><p>Sou aluno</p>
@@ -44,34 +46,26 @@
     <div class="card" onclick="setRole('responsavel')">
       👨‍👩‍👧<br><p>Sou responsável</p>
     </div>
-    <button class="voltar" onclick="voltar('auth')">⬅ Voltar</button>
+    <button class="voltar" onclick="showScreen('auth')">⬅ Voltar</button>
   </div>
 
-  <!-- Tela Principal - Aluno (com emojis do seu HTML) -->
-  <div id="app-aluno" class="screen">
+  <!-- Menu Principal - Aluno -->
+  <div id="menu" class="screen">
     <header>
       <h2>Bem-vindo, Aluno(a)!</h2>
-      <p>Colégio Estadual São Cristóvão</p>
     </header>
     <main>
-      <section class="card">
-        <h3>Grade do Dia</h3>
-        <ul>
-          <li>08:00 - Matemática - Equações</li>
-          <li>09:50 - Português - Leitura</li>
-          <li>13:30 - História - Brasil República</li>
-        </ul>
-      </section>
-      <section class="card">
-        <h3>Boletim Resumido</h3>
-        <p>Média Geral: 8.2</p>
-        <p>Faltas: 4</p>
-      </section>
-      <section class="card">
-        <h3>Avisos</h3>
-        <p>Entrega de trabalho dia 28/03</p>
-      </section>
+      <div class="grid">
+        <div class="item">🏠<span>Início</span></div>
+        <div class="item">📊<span>Grade</span></div>
+        <div class="item">📝<span>Notas</span></div>
+        <div class="item">📅<span>Frequência</span></div>
+        <div class="item">📆<span>Agenda</span></div>
+        <div class="item">🔔<span>Avisos</span></div>
+      </div>
     </main>
+    <button class="sair" onclick="logout()">Sair</button>
+    <!-- Bottom nav com emojis -->
     <nav class="bottom-nav">
       <a href="#" class="active">🏠<span>Início</span></a>
       <a href="#">📊<span>Grade</span></a>
@@ -82,11 +76,12 @@
     </nav>
   </div>
 
-  <!-- Área Responsável (simples por enquanto) -->
-  <div id="app-responsavel" class="screen">
+  <!-- Área Responsável (placeholder) -->
+  <div id="responsavel" class="screen">
     <h2>Área do Responsável</h2>
-    <p>Acompanhe as informações do seu filho(a) aqui em breve.</p>
+    <p>Informações do aluno em breve.</p>
     <button class="sair" onclick="logout()">Sair</button>
+    <button class="voltar" onclick="logout()">Voltar ao login</button>
   </div>
 
   <script src="js/script.js"></script>
