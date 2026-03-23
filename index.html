@@ -4,13 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>App Escola</title>
-  <link rel="stylesheet" href="css/style.css">
+
+  <!-- CSS CORRETO -->
+  <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
 
 <!-- SPLASH -->
 <div id="splash" class="screen active">
-  <img src="images/logo.png" class="logo" alt="logo">
+  <img src="./images/logo.png" class="logo" alt="logo">
   <h2>Colégio Estadual São Cristóvão</h2>
 </div>
 
@@ -27,12 +29,19 @@
   <p id="msg"></p>
 </div>
 
-<!-- TIPO -->
+<!-- ESCOLHA -->
 <div id="tipo" class="screen">
   <h2>Como deseja acessar?</h2>
 
-  <div class="card" onclick="entrarAluno()">👨‍🎓<p>Aluno</p></div>
-  <div class="card" onclick="entrarResponsavel()">👨‍👩‍👧<p>Responsável</p></div>
+  <div class="card" onclick="entrarAluno()">
+    👨‍🎓
+    <p>Aluno</p>
+  </div>
+
+  <div class="card" onclick="entrarResponsavel()">
+    👨‍👩‍👧
+    <p>Responsável</p>
+  </div>
 </div>
 
 <!-- MENU ALUNO -->
@@ -50,13 +59,6 @@
     <div class="item">🔔<span>Avisos</span></div>
   </div>
 
-  <nav class="bottom">
-    <div>🏠</div>
-    <div>📊</div>
-    <div>📝</div>
-    <div>📅</div>
-  </nav>
-
   <button onclick="logout()">Sair</button>
 </div>
 
@@ -67,6 +69,8 @@
   <button onclick="logout()">Sair</button>
 </div>
 
-<script src="js/script.js"></script>
+<!-- JS CORRETO -->
+<script src="./js/script.js"></script>
+
 </body>
 </html>
