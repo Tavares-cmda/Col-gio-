@@ -6,7 +6,7 @@ function show(id){
   document.getElementById(id).classList.add("active");
 }
 
-// splash
+// splash 5 segundos
 window.onload = () => {
   setTimeout(() => {
     show("auth");
@@ -27,7 +27,7 @@ function registrar(){
   usuarios[email] = senha;
   localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
-  msg.innerText = "Registrado! Faça login.";
+  msg.innerText = "Registrado com sucesso!";
 }
 
 // login
@@ -40,15 +40,16 @@ function login(){
     localStorage.setItem("logado", "true");
     show("tipo");
   } else {
-    msg.innerText = "Erro no login!";
+    msg.innerText = "Login inválido!";
   }
 }
 
-// tipo
+// aluno
 function entrarAluno(){
   show("aluno");
 }
 
+// responsável
 function entrarResponsavel(){
   show("responsavel");
 }
