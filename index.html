@@ -8,68 +8,72 @@
 </head>
 <body>
 
-<!-- SPLASH -->
-<div id="splash" class="screen active">
-  <img src="images/logo.png" class="logo">
-  <h2>Colégio Estadual São Cristóvão</h2>
-</div>
-
-<!-- LOGIN -->
-<div id="auth" class="screen">
-  <h2>Entrar ou Registrar</h2>
-
-  <input type="email" id="email" placeholder="email@escola.pr.gov.br">
-  <input type="password" id="senha" placeholder="Senha">
-
-  <button onclick="login()">Entrar</button>
-  <button onclick="registrar()">Registrar</button>
-
-  <p id="msg"></p>
-</div>
-
-<!-- ESCOLHA -->
-<div id="tipo" class="screen">
-  <h2>Como deseja acessar?</h2>
-
-  <div class="card" onclick="entrarAluno()">
-    👨‍🎓
-    <p>Sou aluno</p>
+  <!-- SPLASH -->
+  <div id="splash" class="screen active">
+    <img src="images/logo.png" class="logo" alt="Logo da escola">
+    <h2>Colégio Estadual São Cristóvão</h2>
   </div>
 
-  <div class="card" onclick="entrarResponsavel()">
-    👨‍👩‍👧
-    <p>Sou responsável</p>
-  </div>
-</div>
+  <!-- LOGIN / REGISTRO -->
+  <div id="auth" class="screen">
+    <div class="auth-box">
+      <h2>Entrar ou Registrar</h2>
 
-<!-- MENU ALUNO -->
-<div id="aluno" class="screen">
+      <input type="email" id="email" placeholder="email@escola.pr.gov.br">
+      <input type="password" id="senha" placeholder="Senha">
 
-  <header>
-    <h2>Bem-vindo, Aluno(a)</h2>
-  </header>
+      <button type="button" onclick="login()">Entrar</button>
+      <button type="button" onclick="registrar()">Registrar</button>
 
-  <div class="grid">
-    <div class="item">🏠<span>Início</span></div>
-    <div class="item">📊<span>Grade</span></div>
-    <div class="item">📝<span>Notas</span></div>
-    <div class="item">📅<span>Frequência</span></div>
-    <div class="item">📆<span>Agenda</span></div>
-    <div class="item">🔔<span>Avisos</span></div>
+      <p id="msg"></p>
+    </div>
   </div>
 
-  <button onclick="logout()">Sair</button>
+  <!-- ESCOLHA -->
+  <div id="tipo" class="screen">
+    <h2>Como deseja acessar?</h2>
 
-</div>
+    <div class="card" onclick="entrarAluno()">
+      👨‍🎓
+      <p>Sou aluno</p>
+    </div>
 
-<!-- RESPONSÁVEL -->
-<div id="responsavel" class="screen">
-  <h2>Área do Responsável</h2>
-  <p>Informações em breve</p>
+    <div class="card" onclick="entrarResponsavel()">
+      👨‍👩‍👧
+      <p>Sou responsável</p>
+    </div>
+  </div>
 
-  <button onclick="logout()">Sair</button>
-</div>
+  <!-- MENU ALUNO -->
+  <div id="aluno" class="screen">
 
-<script src="js/script.js"></script>
+    <header>
+      <h2>Bem-vindo, Aluno(a)</h2>
+    </header>
+
+    <main>
+      <div class="grid">
+        <div class="item">🏠<span>Início</span></div>
+        <div class="item">📊<span>Grade</span></div>
+        <div class="item">📝<span>Notas</span></div>
+        <div class="item">📅<span>Frequência</span></div>
+        <div class="item">📆<span>Agenda</span></div>
+        <div class="item">🔔<span>Avisos</span></div>
+      </div>
+    </main>
+
+    <button type="button" onclick="logout()">Sair</button>
+
+  </div>
+
+  <!-- RESPONSÁVEL -->
+  <div id="responsavel" class="screen">
+    <h2>Área do Responsável</h2>
+    <p>Informações em breve</p>
+
+    <button type="button" onclick="logout()">Sair</button>
+  </div>
+
+  <script src="js/script.js"></script>
 </body>
 </html>
