@@ -9,11 +9,7 @@ function show(id){
 // splash
 window.onload = () => {
   setTimeout(() => {
-    if(localStorage.getItem("logado")){
-      show("tipo");
-    } else {
-      show("auth");
-    }
+    show("auth");
   }, 5000);
 };
 
@@ -28,14 +24,10 @@ function registrar(){
     return;
   }
 
-  if(usuarios[email]){
-    msg.innerText = "Já existe!";
-    return;
-  }
-
   usuarios[email] = senha;
   localStorage.setItem("usuarios", JSON.stringify(usuarios));
-  msg.innerText = "Registrado!";
+
+  msg.innerText = "Registrado! Faça login.";
 }
 
 // login
