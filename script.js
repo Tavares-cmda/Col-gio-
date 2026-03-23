@@ -1,54 +1,75 @@
-function esconderTudo(){
-  document.getElementById("inicio").classList.add("hidden");
-  document.getElementById("tipo").classList.add("hidden");
-  document.getElementById("registro").classList.add("hidden");
-  document.getElementById("menu").classList.add("hidden");
+// "Banco" localStorage
+const usuarios = JSON.parse(localStorage.getItem('usuarios')) || {};
+
+// Splash 5s
+window.onload = () => {
+  setTimeout(() => {
+    document.getElementById('splash').classList.remove('active');
+    if (localStorage.getItem('logado')) {
+      showApp();
+    } else {
+      document.getElementById('auth').classList.add('active');
+    }
+  }, 5000);
+};
+
+// Registro
+document.getElementById('btnRegistrar').onclick = () => {
+  const email = document.getElementById('email').value.trim();
+  const senha = document.getElementById('senha').value;
+
+  if (!email.endsWith('@escola.pr.gov.br')) {
+    document.getElementById('msgAuth').textContent = 'Use email terminando em @escola.pr.gov.br';
+    return;
+  }
+  if (senha.length < 6) {
+    document.getElementById('msgAuth').textContent = 'Senha mínima: 6 caracteres';
+    return;
+  }
+
+  usuarios[email] = senha;
+  localStorage.setItem('usuarios', JSON.stringify(usuarios));
+  document.getElementById('msgAuth').textContent = 'Conta criada! Faça login.';
+};
+
+// Login
+document.getElementById('btnEntrar').onclick = () => {
+  const email = document.getElementById('email').value.trim();
+  const senha = document.getElementById('senha').value;
+
+  if (usuarios[email] === senha) {
+    localStorage.setItem('logado', email);
+    document.getElementById('auth').classList.remove('active');
+    document.getElementById('role').classList.add('active');
+  } else {
+    document.getElementById('msgAuth').textContent = 'Email ou senha incorretos';
+  }
+};
+
+// Role
+function setRole(role) {
+  localStorage.setItem('role', role);
+  document.getElementById('role').classList.remove('active');
+  showApp();
 }
 
-function irPara(tela){
-  esconderTudo();
-  document.getElementById(tela).classList.remove("hidden");
+function showApp() {
+  const role = localStorage.getItem('role');
+  if (role === 'aluno') {
+    document.getElementById('app-aluno').classList.add('active');
+  } else {
+    document.getElementById('app-responsavel').classList.add('active');
+  }
 }
 
-function voltar(tela){
-  esconderTudo();
-  document.getElementById(tela).classList.remove("hidden");
+function logout() {
+  localStorage.removeItem('logado');
+  localStorage.removeItem('role');
+  location.reload();
 }
 
-/* 🔥 ENTRAR DIRETO (SEM LOGIN) */
-function entrarDireto(tipo){
-  esconderTudo();
-  document.getElementById("menu").classList.remove("hidden");
-
-  document.getElementById("tituloMenu").innerText = "Menu - " + tipo;
-}
-
-/* REGISTRO */
-function abrirRegistro(){
-  esconderTudo();
-  document.getElementById("registro").classList.remove("hidden");
-}
-
-function validarRegistro(){
-  let email = document.getElementById("email").value;
-  let senha = document.getElementById("senha").value;
-
-  document.getElementById("btnRegistrar").disabled =
-    !(email.includes("@escola.pr.gov.br") && senha.length >= 4);
-}
-
-function registrar(){
-  let email = document.getElementById("email").value;
-  let senha = document.getElementById("senha").value;
-
-  localStorage.setItem("email", email);
-  localStorage.setItem("senha", senha);
-
-  alert("Conta criada com sucesso!");
-  voltar("inicio");
-}
-
-function sair(){
-  esconderTudo();
-  document.getElementById("inicio").classList.remove("hidden");
+// Voltar (simples, adaptado do seu HTML)
+function voltar(targetId) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(targetId).classList.add('active');
 }
