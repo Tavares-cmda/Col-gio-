@@ -78,15 +78,3 @@ header{
   border-radius:12px;
   text-align:center;
 }
-
-/* barra inferior */
-.bottom{
-  position:fixed;
-  bottom:0;
-  width:100%;
-  background:#003366;
-  display:flex;
-  justify-content:space-around;
-  padding:10px;
-  color:white;
-}
