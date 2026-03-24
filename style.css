@@ -2,14 +2,12 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial;
+font-family:Arial, Helvetica, sans-serif;
 }
 
 body{
 background:#f2f2f2;
 }
-
-/* telas */
 
 .screen{
 display:none;
@@ -23,53 +21,42 @@ flex-direction:column;
 display:flex;
 }
 
-/* splash */
-
-.logo{
-width:200px;
-margin-bottom:20px;
-}
-
 .center{
 text-align:center;
 }
 
-/* login */
+.logo{
+width:180px;
+margin-bottom:20px;
+}
 
 input{
 width:250px;
-padding:12px;
+padding:10px;
 margin:10px;
 border-radius:6px;
 border:1px solid #ccc;
 }
 
-/* botões */
-
 button{
 width:250px;
-padding:12px;
+padding:10px;
 margin:10px;
 background:#003366;
 color:white;
 border:none;
-border-radius:8px;
+border-radius:6px;
 cursor:pointer;
 }
-
-/* cards */
 
 .card{
 background:white;
 padding:20px;
 margin:10px;
 border-radius:10px;
-text-align:center;
-cursor:pointer;
 box-shadow:0 2px 6px rgba(0,0,0,0.2);
+cursor:pointer;
 }
-
-/* menu */
 
 header{
 width:100%;
