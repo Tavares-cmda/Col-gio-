@@ -4,52 +4,55 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Colégio Estadual São Cristóvão</title>
-<link rel="stylesheet" href="css/style.css">
-</head>
 
+<link rel="stylesheet" href="css/style.css">
+
+</head>
 <body>
 
 <!-- SPLASH -->
 <div id="splash" class="screen active">
-  <div class="center">
-    <img src="images/logo.png" class="logo">
-    <h2>Colégio Estadual São Cristóvão</h2>
-  </div>
+  <img src="images/logo.png" class="logo">
+  <h2>Colégio Estadual São Cristóvão</h2>
 </div>
 
 <!-- LOGIN -->
 <div id="auth" class="screen">
-  <h2>Entrar ou Registrar</h2>
 
-  <input type="email" id="email" placeholder="seuemail@escola.pr.gov.br">
-  <input type="password" id="senha" placeholder="Senha">
+<h2>Entrar ou Registrar</h2>
 
-  <button onclick="login()">Entrar</button>
-  <button onclick="registrar()">Registrar</button>
+<input id="email" type="email" placeholder="seuemail@escola.pr.gov.br">
+<input id="senha" type="password" placeholder="Senha">
 
-  <p id="msg"></p>
+<button id="btnLogin">Entrar</button>
+<button id="btnRegistro">Registrar</button>
+
+<p id="msg"></p>
+
 </div>
 
-<!-- TIPO -->
+<!-- ESCOLHA -->
 <div id="tipo" class="screen">
-  <h2>Como deseja acessar?</h2>
 
-  <div class="card" onclick="abrirAluno()">
-    👨‍🎓
-    <p>Aluno</p>
-  </div>
+<h2>Como deseja acessar?</h2>
 
-  <div class="card" onclick="abrirResponsavel()">
-    👨‍👩‍👧
-    <p>Responsável</p>
-  </div>
+<div class="card" id="btnAluno">
+👨‍🎓
+<p>Aluno</p>
+</div>
+
+<div class="card" id="btnResponsavel">
+👨‍👩‍👧
+<p>Responsável</p>
+</div>
+
 </div>
 
 <!-- MENU ALUNO -->
 <div id="aluno" class="screen">
 
 <header>
-<h2>Bem-vindo, Aluno</h2>
+<h2>Bem-vindo Aluno</h2>
 </header>
 
 <div class="grid">
@@ -63,15 +66,18 @@
 
 </div>
 
-<button onclick="logout()">Sair</button>
+<button id="logoutAluno">Sair</button>
 
 </div>
 
 <!-- RESPONSAVEL -->
 <div id="responsavel" class="screen">
+
 <h2>Área do Responsável</h2>
 <p>Em breve</p>
-<button onclick="logout()">Sair</button>
+
+<button id="logoutResp">Sair</button>
+
 </div>
 
 <script src="js/script.js"></script>
