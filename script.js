@@ -1,8 +1,7 @@
-// banco de dados local
 let usuarios = JSON.parse(localStorage.getItem("usuarios")) || {};
 
 // função trocar tela
-function mostrarTela(id){
+function trocarTela(id){
 
 document.querySelectorAll(".screen").forEach(function(tela){
 tela.classList.remove("active");
@@ -13,16 +12,39 @@ document.getElementById(id).classList.add("active");
 }
 
 // splash 5 segundos
-window.onload = function(){
+window.addEventListener("load", function(){
 
 setTimeout(function(){
-mostrarTela("auth");
+
+trocarTela("auth");
+
 },5000);
+
+});
+
+// LOGIN
+document.getElementById("btnLogin").onclick = function(){
+
+let email = document.getElementById("email").value;
+let senha = document.getElementById("senha").value;
+let msg = document.getElementById("msg");
+
+if(usuarios[email] === senha){
+
+localStorage.setItem("logado", email);
+
+trocarTela("tipo");
+
+}else{
+
+msg.innerText = "Email ou senha incorretos.";
+
+}
 
 };
 
-// registrar usuário
-function registrar(){
+// REGISTRO
+document.getElementById("btnRegistro").onclick = function(){
 
 let email = document.getElementById("email").value;
 let senha = document.getElementById("senha").value;
@@ -30,14 +52,7 @@ let msg = document.getElementById("msg");
 
 if(!email.endsWith("@escola.pr.gov.br")){
 
-msg.innerText = "Use um email da escola!";
-return;
-
-}
-
-if(email === "" || senha === ""){
-
-msg.innerText = "Preencha os campos!";
+msg.innerText = "Use email da escola.";
 return;
 
 }
@@ -48,48 +63,35 @@ localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
 msg.innerText = "Registro feito! Agora faça login.";
 
-}
+};
 
-// login
-function login(){
+// ALUNO
+document.getElementById("btnAluno").onclick = function(){
 
-let email = document.getElementById("email").value;
-let senha = document.getElementById("senha").value;
-let msg = document.getElementById("msg");
+trocarTela("aluno");
 
-if(usuarios[email] === senha){
+};
 
-localStorage.setItem("logado", email);
+// RESPONSAVEL
+document.getElementById("btnResponsavel").onclick = function(){
 
-mostrarTela("tipo");
+trocarTela("responsavel");
 
-}else{
+};
 
-msg.innerText = "Email ou senha incorretos.";
-
-}
-
-}
-
-// aluno
-function abrirAluno(){
-
-mostrarTela("aluno");
-
-}
-
-// responsável
-function abrirResponsavel(){
-
-mostrarTela("responsavel");
-
-}
-
-// logout
-function logout(){
+// LOGOUT
+document.getElementById("logoutAluno").onclick = function(){
 
 localStorage.removeItem("logado");
 
-mostrarTela("auth");
+trocarTela("auth");
 
-}
+};
+
+document.getElementById("logoutResp").onclick = function(){
+
+localStorage.removeItem("logado");
+
+trocarTela("auth");
+
+};
