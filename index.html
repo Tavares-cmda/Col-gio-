@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>App Escola</title>
-
-  <!-- CSS CORRETO -->
-  <link rel="stylesheet" href="./css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colégio Estadual São Cristóvão</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
 <!-- SPLASH -->
 <div id="splash" class="screen active">
-  <img src="./images/logo.png" class="logo" alt="logo">
-  <h2>Colégio Estadual São Cristóvão</h2>
+  <div class="center">
+    <img src="images/logo.png" class="logo">
+    <h2>Colégio Estadual São Cristóvão</h2>
+  </div>
 </div>
 
 <!-- LOGIN -->
 <div id="auth" class="screen">
   <h2>Entrar ou Registrar</h2>
 
-  <input type="email" id="email" placeholder="email@escola.pr.gov.br">
+  <input type="email" id="email" placeholder="seuemail@escola.pr.gov.br">
   <input type="password" id="senha" placeholder="Senha">
 
   <button onclick="login()">Entrar</button>
@@ -29,16 +30,16 @@
   <p id="msg"></p>
 </div>
 
-<!-- ESCOLHA -->
+<!-- TIPO -->
 <div id="tipo" class="screen">
   <h2>Como deseja acessar?</h2>
 
-  <div class="card" onclick="entrarAluno()">
+  <div class="card" onclick="abrirAluno()">
     👨‍🎓
     <p>Aluno</p>
   </div>
 
-  <div class="card" onclick="entrarResponsavel()">
+  <div class="card" onclick="abrirResponsavel()">
     👨‍👩‍👧
     <p>Responsável</p>
   </div>
@@ -46,31 +47,34 @@
 
 <!-- MENU ALUNO -->
 <div id="aluno" class="screen">
-  <header>
-    <h2>Bem-vindo, Aluno</h2>
-  </header>
 
-  <div class="grid">
-    <div class="item">🏠<span>Início</span></div>
-    <div class="item">📊<span>Grade</span></div>
-    <div class="item">📝<span>Notas</span></div>
-    <div class="item">📅<span>Frequência</span></div>
-    <div class="item">📆<span>Agenda</span></div>
-    <div class="item">🔔<span>Avisos</span></div>
-  </div>
+<header>
+<h2>Bem-vindo, Aluno</h2>
+</header>
 
-  <button onclick="logout()">Sair</button>
+<div class="grid">
+
+<div class="item">🏠<span>Início</span></div>
+<div class="item">📊<span>Grade</span></div>
+<div class="item">📝<span>Notas</span></div>
+<div class="item">📅<span>Frequência</span></div>
+<div class="item">📆<span>Agenda</span></div>
+<div class="item">🔔<span>Avisos</span></div>
+
+</div>
+
+<button onclick="logout()">Sair</button>
+
 </div>
 
 <!-- RESPONSAVEL -->
 <div id="responsavel" class="screen">
-  <h2>Área do Responsável</h2>
-  <p>Em breve</p>
-  <button onclick="logout()">Sair</button>
+<h2>Área do Responsável</h2>
+<p>Em breve</p>
+<button onclick="logout()">Sair</button>
 </div>
 
-<!-- JS CORRETO -->
-<script src="./js/script.js"></script>
+<script src="js/script.js"></script>
 
 </body>
 </html>
