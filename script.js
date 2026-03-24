@@ -1,61 +1,95 @@
+// banco de dados local
 let usuarios = JSON.parse(localStorage.getItem("usuarios")) || {};
 
-// trocar tela
-function show(id){
-  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
+// função trocar tela
+function mostrarTela(id){
+
+document.querySelectorAll(".screen").forEach(function(tela){
+tela.classList.remove("active");
+});
+
+document.getElementById(id).classList.add("active");
+
 }
 
 // splash 5 segundos
-window.onload = () => {
-  setTimeout(() => {
-    show("auth");
-  }, 5000);
+window.onload = function(){
+
+setTimeout(function(){
+mostrarTela("auth");
+},5000);
+
 };
 
-// registrar
+// registrar usuário
 function registrar(){
-  let email = document.getElementById("email").value;
-  let senha = document.getElementById("senha").value;
-  let msg = document.getElementById("msg");
 
-  if(!email.endsWith("@escola.pr.gov.br")){
-    msg.innerText = "Use email da escola!";
-    return;
-  }
+let email = document.getElementById("email").value;
+let senha = document.getElementById("senha").value;
+let msg = document.getElementById("msg");
 
-  usuarios[email] = senha;
-  localStorage.setItem("usuarios", JSON.stringify(usuarios));
+if(!email.endsWith("@escola.pr.gov.br")){
 
-  msg.innerText = "Registrado com sucesso!";
+msg.innerText = "Use um email da escola!";
+return;
+
+}
+
+if(email === "" || senha === ""){
+
+msg.innerText = "Preencha os campos!";
+return;
+
+}
+
+usuarios[email] = senha;
+
+localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+msg.innerText = "Registro feito! Agora faça login.";
+
 }
 
 // login
 function login(){
-  let email = document.getElementById("email").value;
-  let senha = document.getElementById("senha").value;
-  let msg = document.getElementById("msg");
 
-  if(usuarios[email] === senha){
-    localStorage.setItem("logado", "true");
-    show("tipo");
-  } else {
-    msg.innerText = "Login inválido!";
-  }
+let email = document.getElementById("email").value;
+let senha = document.getElementById("senha").value;
+let msg = document.getElementById("msg");
+
+if(usuarios[email] === senha){
+
+localStorage.setItem("logado", email);
+
+mostrarTela("tipo");
+
+}else{
+
+msg.innerText = "Email ou senha incorretos.";
+
+}
+
 }
 
 // aluno
-function entrarAluno(){
-  show("aluno");
+function abrirAluno(){
+
+mostrarTela("aluno");
+
 }
 
 // responsável
-function entrarResponsavel(){
-  show("responsavel");
+function abrirResponsavel(){
+
+mostrarTela("responsavel");
+
 }
 
-// sair
+// logout
 function logout(){
-  localStorage.removeItem("logado");
-  show("auth");
+
+localStorage.removeItem("logado");
+
+mostrarTela("auth");
+
 }
