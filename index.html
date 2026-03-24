@@ -1,49 +1,69 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Colégio Estadual São Cristóvão</title>
 
 <link rel="stylesheet" href="css/style.css">
 
 </head>
+
 <body>
 
-<!-- SPLASH -->
+<!-- TELA INICIAL -->
 <div id="splash" class="screen active">
-  <img src="images/logo.png" class="logo">
-  <h2>Colégio Estadual São Cristóvão</h2>
+
+<div class="center">
+
+<img src="images/logo.png" class="logo" alt="Logo da escola">
+
+<h2>Colégio Estadual São Cristóvão</h2>
+
 </div>
 
-<!-- LOGIN -->
+</div>
+
+<!-- LOGIN / REGISTRO -->
 <div id="auth" class="screen">
+
+<div class="center">
 
 <h2>Entrar ou Registrar</h2>
 
 <input id="email" type="email" placeholder="seuemail@escola.pr.gov.br">
+
 <input id="senha" type="password" placeholder="Senha">
 
 <button id="btnLogin">Entrar</button>
+
 <button id="btnRegistro">Registrar</button>
 
 <p id="msg"></p>
 
 </div>
 
-<!-- ESCOLHA -->
+</div>
+
+<!-- ESCOLHER TIPO -->
 <div id="tipo" class="screen">
+
+<div class="center">
 
 <h2>Como deseja acessar?</h2>
 
 <div class="card" id="btnAluno">
 👨‍🎓
-<p>Aluno</p>
+<p>Sou aluno</p>
 </div>
 
 <div class="card" id="btnResponsavel">
 👨‍👩‍👧
-<p>Responsável</p>
+<p>Sou responsável</p>
+</div>
+
 </div>
 
 </div>
@@ -52,16 +72,23 @@
 <div id="aluno" class="screen">
 
 <header>
-<h2>Bem-vindo Aluno</h2>
+
+<h2>Bem-vindo, Aluno</h2>
+
 </header>
 
 <div class="grid">
 
 <div class="item">🏠<span>Início</span></div>
+
 <div class="item">📊<span>Grade</span></div>
+
 <div class="item">📝<span>Notas</span></div>
+
 <div class="item">📅<span>Frequência</span></div>
+
 <div class="item">📆<span>Agenda</span></div>
+
 <div class="item">🔔<span>Avisos</span></div>
 
 </div>
@@ -70,13 +97,18 @@
 
 </div>
 
-<!-- RESPONSAVEL -->
+<!-- AREA RESPONSAVEL -->
 <div id="responsavel" class="screen">
 
+<div class="center">
+
 <h2>Área do Responsável</h2>
-<p>Em breve</p>
+
+<p>Em breve informações do aluno.</p>
 
 <button id="logoutResp">Sair</button>
+
+</div>
 
 </div>
 
