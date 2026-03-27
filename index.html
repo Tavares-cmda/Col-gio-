@@ -1,118 +1,540 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Colégio Estadual São Cristóvão</title>
-
-<link rel="stylesheet" href="css/style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escola Paraná - App</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        
+        :root {
+            --primary: #003087;
+            --secondary: #C8102E;
+            --light: #f8f9fa;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #003087, #0055cc);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Tela Splash */
+        #splash {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, #003087, #0055cc);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 1s ease;
+        }
+        
+        #splash-logo {
+            width: 220px;
+            height: 220px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            font-size: 80px;
+            color: #003087;
+            font-weight: bold;
+        }
+        
+        #splash-text {
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        /* Telas principais */
+        .screen {
+            display: none;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .screen.active { display: block; }
+        
+        header {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .logo-header {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        /* Formulários */
+        .form-container {
+            max-width: 420px;
+            margin: 40px auto;
+            background: white;
+            color: #333;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        input, button {
+            width: 100%;
+            padding: 14px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        button:hover {
+            background: #002266;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #666;
+        }
+        
+        /* Dashboard Aluno - inspirado no Escola Paraná */
+        .dashboard {
+            padding: 15px;
+        }
+        
+        .welcome {
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+        
+        .card {
+            background: white;
+            color: #333;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .nav-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            color: #333;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        
+        .nav-item {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            cursor: pointer;
+        }
+        
+        .nav-item.active {
+            color: var(--primary);
+        }
+        
+        .nav-item i {
+            font-size: 24px;
+            display: block;
+            margin-bottom: 4px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .grade {
+            font-weight: bold;
+            color: #003087;
+        }
+        
+        .frequencia {
+            color: #28a745;
+            font-weight: 600;
+        }
+        
+        .modal {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+        
+        .modal-content {
+            background: white;
+            color: #333;
+            padding: 25px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 400px;
+        }
+    </style>
 </head>
-
 <body>
 
-<!-- TELA INICIAL -->
-<div id="splash" class="screen active">
+    <!-- TELA SPLASH -->
+    <div id="splash">
+        <div id="splash-logo">
+            <!-- === COLOQUE AQUI O SÍMBOLO DA ESCOLA === -->
+            <!-- Exemplo: <img src="sua-imagem.png" style="width:180px;height:180px;border-radius:50%;"> -->
+            🏫
+        </div>
+        <div id="splash-text">Escola Paraná</div>
+        <p style="margin-top: 40px; opacity: 0.8;">Carregando...</p>
+    </div>
 
-<div class="center">
+    <!-- TELA DE LOGIN / REGISTRO -->
+    <div id="auth-screen" class="screen active">
+        <div class="form-container">
+            <h2 style="text-align:center; color:#003087; margin-bottom:25px;">Bem-vindo ao Escola Paraná</h2>
+            
+            <div id="login-form">
+                <h3>Entrar</h3>
+                <input type="email" id="login-email" placeholder="seuemail@escola.pr.gov.br" required>
+                <input type="password" id="login-senha" placeholder="Senha" required>
+                <button onclick="fazerLogin()">Entrar</button>
+                <p style="text-align:center; margin:15px 0;">
+                    Não tem conta? <a href="#" onclick="mostrarRegistro()" style="color:var(--primary);">Registrar</a>
+                </p>
+            </div>
+            
+            <div id="register-form" style="display:none;">
+                <h3>Criar Conta</h3>
+                <input type="email" id="reg-email" placeholder="seuemail@escola.pr.gov.br" required>
+                <input type="password" id="reg-senha" placeholder="Crie uma senha" required>
+                <input type="password" id="reg-senha-conf" placeholder="Confirme a senha" required>
+                <button onclick="registrarUsuario()">Registrar</button>
+                <p style="text-align:center; margin:15px 0;">
+                    Já tem conta? <a href="#" onclick="mostrarLogin()" style="color:var(--primary);">Fazer Login</a>
+                </p>
+            </div>
+        </div>
+    </div>
 
-<img src="images/logo.png" class="logo" alt="Logo da escola">
+    <!-- TELA DE ESCOLHA ALUNO / RESPONSÁVEL -->
+    <div id="role-screen" class="screen">
+        <div style="text-align:center; padding:60px 20px;">
+            <h2 style="margin-bottom:40px; font-size:28px;">Quem está acessando?</h2>
+            
+            <button onclick="escolherRole('aluno')" style="background:#003087; margin:15px 0; padding:18px; font-size:18px;">
+                👨‍🎓 Sou Aluno
+            </button>
+            
+            <button onclick="escolherRole('responsavel')" style="background:#C8102E; margin:15px 0; padding:18px; font-size:18px;">
+                👨‍👩‍👧 Sou Responsável
+            </button>
+        </div>
+    </div>
 
-<h2>Colégio Estadual São Cristóvão</h2>
+    <!-- DASHBOARD ALUNO (inspirado no App Escola Paraná) -->
+    <div id="aluno-dashboard" class="screen">
+        <header>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                    <span class="logo-header">🏫 Escola Paraná</span>
+                </div>
+                <div style="text-align:right;">
+                    <div id="aluno-nome" style="font-weight:600;">Aluno</div>
+                    <div id="aluno-email" style="font-size:14px; opacity:0.8;"></div>
+                </div>
+            </div>
+        </header>
 
-</div>
+        <div class="dashboard">
+            <div class="welcome">Olá, <span id="welcome-name"></span>!</div>
+            <p style="margin-bottom:20px; opacity:0.9;">Aqui está o seu resumo escolar</p>
 
-</div>
+            <!-- Card Boletim -->
+            <div class="card">
+                <h3>📊 Boletim - 2º Trimestre</h3>
+                <table>
+                    <tr><th>Disciplina</th><th>Nota</th></tr>
+                    <tr><td>Matemática</td><td class="grade">8,5</td></tr>
+                    <tr><td>Português</td><td class="grade">9,2</td></tr>
+                    <tr><td>História</td><td class="grade">7,8</td></tr>
+                    <tr><td>Ciências</td><td class="grade">8,9</td></tr>
+                    <tr><td>Inglês</td><td class="grade">9,5</td></tr>
+                </table>
+            </div>
 
-<!-- LOGIN / REGISTRO -->
-<div id="auth" class="screen">
+            <!-- Card Frequência -->
+            <div class="card">
+                <h3>📅 Frequência</h3>
+                <p style="font-size:48px; text-align:center; margin:15px 0;" class="frequencia">96%</p>
+                <p style="text-align:center; color:#28a745;">Excelente! Você está presente em quase todas as aulas.</p>
+            </div>
 
-<div class="center">
+            <!-- Card Grade Horária -->
+            <div class="card">
+                <h3>🕒 Grade Horária - Hoje</h3>
+                <ul style="list-style:none; padding-left:10px;">
+                    <li style="margin:12px 0;">07:30 - Matemática (Prof. Carlos)</li>
+                    <li style="margin:12px 0;">08:30 - Português (Profª. Ana)</li>
+                    <li style="margin:12px 0;">10:00 - Educação Física</li>
+                </ul>
+            </div>
 
-<h2>Entrar ou Registrar</h2>
+            <!-- Avisos -->
+            <div class="card">
+                <h3>📢 Avisos Importantes</h3>
+                <p><strong>Reunião de pais:</strong> 05/04/2026 às 19h</p>
+                <p><strong>Entrega de trabalho:</strong> Redação - 02/04/2026</p>
+            </div>
+        </div>
 
-<input id="email" type="email" placeholder="seuemail@escola.pr.gov.br">
+        <!-- Navegação inferior -->
+        <div class="nav-bottom">
+            <div class="nav-item active" onclick="alert('Você já está na tela inicial')">
+                <span>🏠</span><br>Início
+            </div>
+            <div class="nav-item" onclick="alert('Boletim completo em breve...')">
+                <span>📊</span><br>Boletim
+            </div>
+            <div class="nav-item" onclick="alert('Agenda completa em breve...')">
+                <span>📅</span><br>Agenda
+            </div>
+            <div class="nav-item" onclick="alert('Frequência detalhada em breve...')">
+                <span>📌</span><br>Freq.
+            </div>
+        </div>
+    </div>
 
-<input id="senha" type="password" placeholder="Senha">
+    <!-- DASHBOARD RESPONSÁVEL (simplificado) -->
+    <div id="responsavel-dashboard" class="screen">
+        <header>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span class="logo-header">🏫 Escola Paraná</span>
+                <div>
+                    <div style="font-weight:600;">Responsável</div>
+                </div>
+            </div>
+        </header>
+        
+        <div style="padding:20px; text-align:center;">
+            <h2>Bem-vindo, Responsável!</h2>
+            <p style="margin:30px 0;">Você está acompanhando o aluno: <strong>João Silva</strong></p>
+            
+            <div class="card">
+                <h3>Desempenho atual</h3>
+                <p>Média geral: <strong>8,7</strong></p>
+                <p>Frequência: <strong>96%</strong></p>
+            </div>
+            
+            <button onclick="logout()" style="margin-top:30px; background:#C8102E;">Sair</button>
+        </div>
+    </div>
 
-<button id="btnLogin">Entrar</button>
+    <!-- Modal de sucesso -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content">
+            <h3 style="color:#28a745;">✅ Cadastro realizado com sucesso!</h3>
+            <p id="modal-text"></p>
+            <button onclick="fecharModal()" style="margin-top:20px;">Fechar</button>
+        </div>
+    </div>
 
-<button id="btnRegistro">Registrar</button>
-
-<p id="msg"></p>
-
-</div>
-
-</div>
-
-<!-- ESCOLHER TIPO -->
-<div id="tipo" class="screen">
-
-<div class="center">
-
-<h2>Como deseja acessar?</h2>
-
-<div class="card" id="btnAluno">
-👨‍🎓
-<p>Sou aluno</p>
-</div>
-
-<div class="card" id="btnResponsavel">
-👨‍👩‍👧
-<p>Sou responsável</p>
-</div>
-
-</div>
-
-</div>
-
-<!-- MENU ALUNO -->
-<div id="aluno" class="screen">
-
-<header>
-
-<h2>Bem-vindo, Aluno</h2>
-
-</header>
-
-<div class="grid">
-
-<div class="item">🏠<span>Início</span></div>
-
-<div class="item">📊<span>Grade</span></div>
-
-<div class="item">📝<span>Notas</span></div>
-
-<div class="item">📅<span>Frequência</span></div>
-
-<div class="item">📆<span>Agenda</span></div>
-
-<div class="item">🔔<span>Avisos</span></div>
-
-</div>
-
-<button id="logoutAluno">Sair</button>
-
-</div>
-
-<!-- AREA RESPONSAVEL -->
-<div id="responsavel" class="screen">
-
-<div class="center">
-
-<h2>Área do Responsável</h2>
-
-<p>Em breve informações do aluno.</p>
-
-<button id="logoutResp">Sair</button>
-
-</div>
-
-</div>
-
-<script src="js/script.js"></script>
-
+    <script>
+        // ====================== DADOS SIMULADOS ======================
+        let usuarioLogado = null;
+        
+        // Banco de dados simulado (localStorage)
+        function salvarUsuario(email, senha) {
+            const usuarios = JSON.parse(localStorage.getItem('usuariosEscola')) || {};
+            usuarios[email] = {
+                email: email,
+                senha: senha,
+                role: null,
+                nome: email.split('@')[0].replace('.', ' ')
+            };
+            localStorage.setItem('usuariosEscola', JSON.stringify(usuarios));
+        }
+        
+        function buscarUsuario(email, senha) {
+            const usuarios = JSON.parse(localStorage.getItem('usuariosEscola')) || {};
+            const user = usuarios[email];
+            if (user && user.senha === senha) {
+                return user;
+            }
+            return null;
+        }
+        
+        // ====================== TELAS ======================
+        function mostrarTela(id) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+        
+        // Splash Screen - 5 segundos
+        window.onload = function() {
+            setTimeout(() => {
+                document.getElementById('splash').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('splash').style.display = 'none';
+                    // Verifica se já tem login salvo
+                    const ultimoEmail = localStorage.getItem('ultimoEmailEscola');
+                    if (ultimoEmail) {
+                        const usuarios = JSON.parse(localStorage.getItem('usuariosEscola')) || {};
+                        if (usuarios[ultimoEmail]) {
+                            usuarioLogado = usuarios[ultimoEmail];
+                            mostrarTela('role-screen');
+                            return;
+                        }
+                    }
+                    mostrarTela('auth-screen');
+                }, 1000);
+            }, 5000);
+        };
+        
+        // ====================== AUTENTICAÇÃO ======================
+        function mostrarRegistro() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('register-form').style.display = 'block';
+        }
+        
+        function mostrarLogin() {
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('register-form').style.display = 'none';
+        }
+        
+        function registrarUsuario() {
+            const email = document.getElementById('reg-email').value.trim();
+            const senha = document.getElementById('reg-senha').value;
+            const conf = document.getElementById('reg-senha-conf').value;
+            
+            if (!email.endsWith('@escola.pr.gov.br')) {
+                alert('O e-mail deve terminar com @escola.pr.gov.br');
+                return;
+            }
+            
+            if (senha.length < 6) {
+                alert('A senha deve ter pelo menos 6 caracteres');
+                return;
+            }
+            
+            if (senha !== conf) {
+                alert('As senhas não coincidem');
+                return;
+            }
+            
+            salvarUsuario(email, senha);
+            localStorage.setItem('ultimoEmailEscola', email);
+            
+            document.getElementById('modal-text').innerHTML = `Conta criada com sucesso!<br><strong>${email}</strong>`;
+            document.getElementById('success-modal').style.display = 'flex';
+            
+            setTimeout(() => {
+                fecharModal();
+                usuarioLogado = { email: email, nome: email.split('@')[0] };
+                mostrarTela('role-screen');
+            }, 2000);
+        }
+        
+        function fazerLogin() {
+            const email = document.getElementById('login-email').value.trim();
+            const senha = document.getElementById('login-senha').value;
+            
+            if (!email.endsWith('@escola.pr.gov.br')) {
+                alert('Use um e-mail @escola.pr.gov.br');
+                return;
+            }
+            
+            const user = buscarUsuario(email, senha);
+            
+            if (user) {
+                usuarioLogado = user;
+                localStorage.setItem('ultimoEmailEscola', email);
+                mostrarTela('role-screen');
+            } else {
+                alert('E-mail ou senha incorretos. Verifique ou registre-se.');
+            }
+        }
+        
+        function fecharModal() {
+            document.getElementById('success-modal').style.display = 'none';
+        }
+        
+        // ====================== ESCOLHA DE PERFIL ======================
+        function escolherRole(role) {
+            if (!usuarioLogado) return;
+            
+            usuarioLogado.role = role;
+            
+            if (role === 'aluno') {
+                document.getElementById('aluno-nome').textContent = usuarioLogado.nome || 'Aluno';
+                document.getElementById('aluno-email').textContent = usuarioLogado.email;
+                document.getElementById('welcome-name').textContent = usuarioLogado.nome || 'Aluno';
+                mostrarTela('aluno-dashboard');
+            } else {
+                mostrarTela('responsavel-dashboard');
+            }
+        }
+        
+        function logout() {
+            if (confirm('Deseja sair da conta?')) {
+                usuarioLogado = null;
+                mostrarTela('auth-screen');
+            }
+        }
+        
+        // Tecla Enter nos campos de senha
+        document.getElementById('login-senha').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') fazerLogin();
+        });
+        
+        document.getElementById('reg-senha-conf').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') registrarUsuario();
+        });
+        
+        console.log('%cApp Escola Paraná carregado com sucesso! (Single HTML - +550 linhas)', 'color:#003087; font-weight:bold');
+    </script>
 </body>
 </html>
