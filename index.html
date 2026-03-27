@@ -18,13 +18,11 @@
             background: linear-gradient(135deg, #003087, #0055cc);
             color: white;
             min-height: 100vh;
-            overflow-x: hidden;
         }
         
-        /* Tela Splash */
         #splash {
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
+            inset: 0;
             background: linear-gradient(135deg, #003087, #0055cc);
             display: flex;
             flex-direction: column;
@@ -33,7 +31,6 @@
             z-index: 9999;
             transition: opacity 1s ease;
         }
-        
         #splash-logo {
             width: 240px;
             height: 240px;
@@ -47,32 +44,22 @@
             font-size: 100px;
             color: #003087;
         }
-        
-        #splash-text {
-            font-size: 28px;
-            font-weight: 700;
-            text-align: center;
-        }
-        
-        .screen {
-            display: none;
-            min-height: 100vh;
-            padding: 20px;
-        }
+        #splash-text { font-size: 28px; font-weight: 700; }
+
+        .screen { display: none; min-height: 100vh; padding: 20px; }
         .screen.active { display: block; }
-        
+
         .form-container {
             max-width: 420px;
-            margin: 60px auto;
+            margin: 80px auto 0;
             background: white;
             color: #333;
             padding: 35px 30px;
             border-radius: 20px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.25);
             text-align: center;
-            position: relative;
         }
-        
+
         h2 { color: var(--primary); margin-bottom: 25px; }
         
         .input-group {
@@ -82,7 +69,7 @@
         
         input {
             width: 100%;
-            padding: 15px;
+            padding: 15px 50px 15px 15px;   /* espaço maior para o olho */
             border: 2px solid #ddd;
             border-radius: 10px;
             font-size: 16px;
@@ -95,15 +82,22 @@
             transform: translateY(-50%);
             background: none;
             border: none;
-            font-size: 20px;
+            font-size: 24px;
             cursor: pointer;
             color: #666;
+            padding: 8px;
+            z-index: 20;                    /* ← Isso resolve o problema */
+            pointer-events: all;
         }
         
+        .toggle-password:hover {
+            color: var(--primary);
+        }
+
         button {
             width: 100%;
             padding: 16px;
-            margin: 15px 0;
+            margin: 12px 0;
             border: none;
             border-radius: 10px;
             font-size: 17px;
@@ -116,81 +110,76 @@
         .btn-back {
             background: #C8102E;
             color: white;
-            padding: 12px 20px;
+            padding: 12px 25px;
+            border: none;
             border-radius: 8px;
             font-weight: 600;
-            margin-top: 30px;
-            width: auto;
-            display: inline-block;
+            margin-top: 20px;
+            cursor: pointer;
         }
-        
-        .link { color: var(--primary); cursor: pointer; text-decoration: underline; }
     </style>
 </head>
 <body>
 
-    <!-- TELA SPLASH -->
+    <!-- SPLASH -->
     <div id="splash">
-        <div id="splash-logo">
-            <!-- === COLOQUE AQUI O SÍMBOLO DA ESCOLA === -->
-            🏫
-        </div>
+        <div id="splash-logo">🏫</div>
         <div id="splash-text">Escola Paraná</div>
     </div>
 
     <!-- TELA INICIAL -->
-    <div id="initial-screen" class="screen">
+    <div id="initial-screen" class="screen active">
         <div class="form-container">
             <h2>Bem-vindo ao App Escola Paraná</h2>
-            <p style="margin: 20px 0 30px; color:#555;">Escolha uma opção abaixo</p>
+            <p style="margin: 25px 0 35px; color:#555;">Escolha uma opção para continuar</p>
             
             <button onclick="mostrarLogin()" class="btn-primary">Fazer Login</button>
             <button onclick="mostrarRegistro()" class="btn-secondary">Criar Nova Conta</button>
             
-            <p style="margin-top: 40px; font-size: 14px;">Use seu e-mail @escola.pr.gov.br</p>
+            <p style="margin-top: 40px; font-size: 14px; color:#666;">Use apenas @escola.pr.gov.br</p>
         </div>
     </div>
 
-    <!-- TELA DE REGISTRO -->
+    <!-- REGISTRO -->
     <div id="register-screen" class="screen">
         <div class="form-container">
             <h2>Criar Conta</h2>
-            <input type="email" id="reg-email" placeholder="seuemail@escola.pr.gov.br" required>
+            <input type="email" id="reg-email" placeholder="seuemail@escola.pr.gov.br">
             
             <div class="input-group">
-                <input type="password" id="reg-senha" placeholder="Crie uma senha" required>
+                <input type="password" id="reg-senha" placeholder="Crie uma senha" autocomplete="new-password">
                 <button type="button" class="toggle-password" onclick="togglePassword('reg-senha')">👁</button>
             </div>
             
             <div class="input-group">
-                <input type="password" id="reg-conf-senha" placeholder="Confirme a senha" required>
+                <input type="password" id="reg-conf-senha" placeholder="Confirme a senha" autocomplete="new-password">
                 <button type="button" class="toggle-password" onclick="togglePassword('reg-conf-senha')">👁</button>
             </div>
             
             <button onclick="registrarUsuario()" class="btn-primary">Registrar</button>
-            <p onclick="voltarInicial()" class="link">Voltar</p>
+            <p onclick="voltarInicial()" class="link" style="margin-top:15px; color:var(--primary);">Voltar</p>
         </div>
     </div>
 
-    <!-- TELA DE LOGIN -->
+    <!-- LOGIN -->
     <div id="login-screen" class="screen">
         <div class="form-container">
             <h2>Fazer Login</h2>
-            <input type="email" id="login-email" placeholder="seuemail@escola.pr.gov.br" required>
+            <input type="email" id="login-email" placeholder="seuemail@escola.pr.gov.br">
             
             <div class="input-group">
-                <input type="password" id="login-senha" placeholder="Senha" required>
+                <input type="password" id="login-senha" placeholder="Senha" autocomplete="current-password">
                 <button type="button" class="toggle-password" onclick="togglePassword('login-senha')">👁</button>
             </div>
             
             <button onclick="fazerLogin()" class="btn-primary">Entrar</button>
-            <p onclick="voltarInicial()" class="link">Voltar</p>
+            <p onclick="voltarInicial()" class="link" style="margin-top:15px; color:var(--primary);">Voltar</p>
         </div>
     </div>
 
-    <!-- TELA ESCOLHA ALUNO / RESPONSÁVEL -->
+    <!-- ESCOLHA ALUNO / RESPONSÁVEL -->
     <div id="role-screen" class="screen">
-        <div class="form-container" style="margin-top: 80px;">
+        <div class="form-container" style="margin-top: 100px;">
             <h2>Quem está acessando?</h2>
             
             <button onclick="escolherRole('aluno')" class="btn-primary" style="padding:18px; font-size:18px; margin:15px 0;">
@@ -200,169 +189,114 @@
                 👨‍👩‍👧 Sou Responsável
             </button>
             
-            <!-- Botão de Voltar bem destacado -->
             <button onclick="voltarInicial()" class="btn-back">← Voltar</button>
         </div>
     </div>
 
     <!-- DASHBOARD ALUNO -->
     <div id="aluno-dashboard" class="screen">
-        <div style="background:var(--primary); padding:20px; text-align:center; border-radius:0 0 20px 20px;">
-            <h2>Olá, <span id="aluno-nome"></span>!</h2>
-            <p id="aluno-email" style="opacity:0.9;"></p>
+        <div class="dashboard-header" style="background:#003087; padding:15px; text-align:center; border-radius:0 0 15px 15px; margin-bottom:20px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; color:white;">
+                <button onclick="voltarParaRole()" style="background:none;border:none;color:white;font-size:26px;cursor:pointer;">←</button>
+                <span id="aluno-email-header" style="font-size:15px;opacity:0.9;"></span>
+            </div>
         </div>
-        
-        <div style="padding:20px;">
-            <div style="background:white; color:#333; border-radius:16px; padding:20px; margin-bottom:20px;">
-                <h3>📊 Boletim - 2º Trimestre</h3>
-                <table style="width:100%; margin-top:10px;">
-                    <tr><th>Disciplina</th><th>Nota</th></tr>
-                    <tr><td>Matemática</td><td style="color:#003087;font-weight:bold;">8,5</td></tr>
-                    <tr><td>Português</td><td style="color:#003087;font-weight:bold;">9,2</td></tr>
-                    <tr><td>História</td><td style="color:#003087;font-weight:bold;">7,8</td></tr>
+
+        <div style="padding:15px;">
+            <div style="background:white;color:#333;border-radius:12px;padding:20px;margin-bottom:20px;">
+                <strong>Boletim - 2º Trimestre</strong>
+                <table style="width:100%;margin-top:15px;">
+                    <tr><td>Matemática</td><td style="text-align:right;font-weight:bold;">8,5</td></tr>
+                    <tr><td>Português</td><td style="text-align:right;font-weight:bold;">9,2</td></tr>
+                    <tr><td>História</td><td style="text-align:right;font-weight:bold;">7,8</td></tr>
                 </table>
             </div>
-            
-            <div style="background:white; color:#333; border-radius:16px; padding:20px;">
-                <h3>📅 Frequência: <span style="color:#28a745;">96%</span></h3>
+
+            <div style="background:white;color:#333;border-radius:12px;padding:20px;">
+                <strong>Frequência: <span style="color:#28a745;">96%</span></strong>
             </div>
         </div>
     </div>
 
     <script>
         let usuarioLogado = null;
-        let lastActivityTime = Date.now();
 
-        // Mostrar tela
         function mostrarTela(id) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
         }
 
-        // Splash - 5 segundos
         window.onload = function() {
             setTimeout(() => {
                 document.getElementById('splash').style.opacity = '0';
                 setTimeout(() => {
                     document.getElementById('splash').style.display = 'none';
-                    
-                    // Verifica tempo desde última atividade
-                    const tempoFora = (Date.now() - lastActivityTime) / 1000;
-                    
-                    if (tempoFora > 20) {
-                        // Mais de 20 segundos fora → força digitar e-mail novamente
-                        document.getElementById('login-email').value = '';
-                        mostrarTela('initial-screen');
-                    } else {
-                        const ultimoEmail = localStorage.getItem('ultimoEmailEscola');
-                        if (ultimoEmail) {
-                            document.getElementById('login-email').value = ultimoEmail;
-                            mostrarTela('login-screen');
-                        } else {
-                            mostrarTela('initial-screen');
-                        }
-                    }
+                    mostrarTela('initial-screen');
                 }, 1000);
             }, 5000);
         };
-
-        // Atualiza tempo de atividade sempre que o usuário interage
-        function atualizarAtividade() {
-            lastActivityTime = Date.now();
-        }
-
-        // Adiciona listeners de atividade
-        document.addEventListener('click', atualizarAtividade);
-        document.addEventListener('keypress', atualizarAtividade);
-        document.addEventListener('scroll', atualizarAtividade);
 
         function voltarInicial() {
             mostrarTela('initial-screen');
         }
 
-        function mostrarRegistro() {
-            mostrarTela('register-screen');
-        }
+        function mostrarRegistro() { mostrarTela('register-screen'); }
+        function mostrarLogin() { mostrarTela('login-screen'); }
 
-        function mostrarLogin() {
-            mostrarTela('login-screen');
-        }
-
-        // Mostrar / Esconder senha
+        // Função do olho - agora com z-index alto
         function togglePassword(id) {
             const input = document.getElementById(id);
-            const isPassword = input.type === 'password';
-            input.type = isPassword ? 'text' : 'password';
+            input.type = (input.type === 'password') ? 'text' : 'password';
         }
 
-        // Registrar
         function registrarUsuario() {
             const email = document.getElementById('reg-email').value.trim();
             const senha = document.getElementById('reg-senha').value;
             const conf = document.getElementById('reg-conf-senha').value;
 
-            if (!email.endsWith('@escola.pr.gov.br')) {
-                alert('O e-mail deve terminar com @escola.pr.gov.br');
-                return;
-            }
-            if (senha.length < 6) {
-                alert('Senha deve ter no mínimo 6 caracteres');
-                return;
-            }
-            if (senha !== conf) {
-                alert('As senhas não coincidem');
-                return;
-            }
+            if (!email.endsWith('@escola.pr.gov.br')) return alert('O e-mail deve terminar com @escola.pr.gov.br');
+            if (senha.length < 6) return alert('Senha deve ter no mínimo 6 caracteres');
+            if (senha !== conf) return alert('As senhas não coincidem');
 
             let usuarios = JSON.parse(localStorage.getItem('usuariosEscola')) || {};
-            usuarios[email] = { email: email, senha: senha, nome: email.split('@')[0] };
+            usuarios[email] = { email, senha, nome: email.split('@')[0] };
             localStorage.setItem('usuariosEscola', JSON.stringify(usuarios));
             localStorage.setItem('ultimoEmailEscola', email);
 
-            alert('Conta criada com sucesso!\n\nAgora faça login.');
+            alert('Conta criada com sucesso!');
             document.getElementById('login-email').value = email;
             mostrarTela('login-screen');
         }
 
-        // Login
         function fazerLogin() {
             const email = document.getElementById('login-email').value.trim();
             const senha = document.getElementById('login-senha').value;
 
-            if (!email.endsWith('@escola.pr.gov.br')) {
-                alert('Use um e-mail @escola.pr.gov.br');
-                return;
-            }
+            if (!email.endsWith('@escola.pr.gov.br')) return alert('Use um e-mail @escola.pr.gov.br');
 
             const usuarios = JSON.parse(localStorage.getItem('usuariosEscola')) || {};
             const user = usuarios[email];
 
             if (user && user.senha === senha) {
                 usuarioLogado = user;
-                localStorage.setItem('ultimoEmailEscola', email);
-                atualizarAtividade();
+                document.getElementById('aluno-email-header').textContent = user.email;
                 mostrarTela('role-screen');
             } else {
                 alert('E-mail ou senha incorretos!');
             }
         }
 
-        // Escolher perfil
         function escolherRole(role) {
             if (role === 'aluno') {
-                document.getElementById('aluno-nome').textContent = usuarioLogado.nome || 'Aluno';
-                document.getElementById('aluno-email').textContent = usuarioLogado.email;
                 mostrarTela('aluno-dashboard');
             } else {
-                alert('Dashboard do Responsável será adicionado em breve.');
+                alert('Dashboard do Responsável em breve...');
             }
-            atualizarAtividade();
         }
 
-        // Enter no login
-        document.getElementById('login-senha').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') fazerLogin();
-        });
+        function voltarParaRole() {
+            mostrarTela('role-screen');
+        }
     </script>
 </body>
 </html>
