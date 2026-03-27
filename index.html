@@ -10,7 +10,6 @@
         :root {
             --primary: #003087;
             --secondary: #C8102E;
-            --light: #f8f9fa;
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -55,7 +54,6 @@
             text-align: center;
         }
         
-        /* Telas */
         .screen {
             display: none;
             min-height: 100vh;
@@ -72,17 +70,34 @@
             border-radius: 20px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.25);
             text-align: center;
+            position: relative;
         }
         
         h2 { color: var(--primary); margin-bottom: 25px; }
         
+        .input-group {
+            position: relative;
+            margin: 12px 0;
+        }
+        
         input {
             width: 100%;
             padding: 15px;
-            margin: 12px 0;
             border: 2px solid #ddd;
             border-radius: 10px;
             font-size: 16px;
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #666;
         }
         
         button {
@@ -98,70 +113,32 @@
         
         .btn-primary { background: var(--primary); color: white; }
         .btn-secondary { background: #666; color: white; }
+        .btn-back {
+            background: #C8102E;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-top: 30px;
+            width: auto;
+            display: inline-block;
+        }
         
         .link { color: var(--primary); cursor: pointer; text-decoration: underline; }
-        
-        /* Dashboard Aluno - estilo Escola Paraná */
-        .dashboard-header {
-            background: var(--primary);
-            padding: 20px;
-            text-align: center;
-            border-radius: 0 0 20px 20px;
-        }
-        
-        .card {
-            background: white;
-            color: #333;
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-        }
-        th { background: var(--primary); color: white; }
-        
-        .nav-bottom {
-            position: fixed;
-            bottom: 0; left: 0; right: 0;
-            background: white;
-            color: #333;
-            display: flex;
-            justify-content: space-around;
-            padding: 12px 0;
-            box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .nav-item {
-            text-align: center;
-            font-size: 12px;
-            color: #666;
-        }
-        .nav-item.active { color: var(--primary); }
     </style>
 </head>
 <body>
 
-    <!-- TELA SPLASH - 3 segundos -->
+    <!-- TELA SPLASH -->
     <div id="splash">
         <div id="splash-logo">
             <!-- === COLOQUE AQUI O SÍMBOLO DA ESCOLA === -->
-            <!-- Exemplo: <img src="sua-foto-simbolo.png" style="width:200px; height:200px; border-radius:50%;"> -->
             🏫
         </div>
         <div id="splash-text">Escola Paraná</div>
     </div>
 
-    <!-- TELA INICIAL - Registrar ou Fazer Login -->
+    <!-- TELA INICIAL -->
     <div id="initial-screen" class="screen">
         <div class="form-container">
             <h2>Bem-vindo ao App Escola Paraná</h2>
@@ -179,8 +156,17 @@
         <div class="form-container">
             <h2>Criar Conta</h2>
             <input type="email" id="reg-email" placeholder="seuemail@escola.pr.gov.br" required>
-            <input type="password" id="reg-senha" placeholder="Crie uma senha" required>
-            <input type="password" id="reg-conf-senha" placeholder="Confirme a senha" required>
+            
+            <div class="input-group">
+                <input type="password" id="reg-senha" placeholder="Crie uma senha" required>
+                <button type="button" class="toggle-password" onclick="togglePassword('reg-senha')">👁</button>
+            </div>
+            
+            <div class="input-group">
+                <input type="password" id="reg-conf-senha" placeholder="Confirme a senha" required>
+                <button type="button" class="toggle-password" onclick="togglePassword('reg-conf-senha')">👁</button>
+            </div>
+            
             <button onclick="registrarUsuario()" class="btn-primary">Registrar</button>
             <p onclick="voltarInicial()" class="link">Voltar</p>
         </div>
@@ -191,71 +177,61 @@
         <div class="form-container">
             <h2>Fazer Login</h2>
             <input type="email" id="login-email" placeholder="seuemail@escola.pr.gov.br" required>
-            <input type="password" id="login-senha" placeholder="Senha" required>
+            
+            <div class="input-group">
+                <input type="password" id="login-senha" placeholder="Senha" required>
+                <button type="button" class="toggle-password" onclick="togglePassword('login-senha')">👁</button>
+            </div>
+            
             <button onclick="fazerLogin()" class="btn-primary">Entrar</button>
             <p onclick="voltarInicial()" class="link">Voltar</p>
         </div>
     </div>
 
-    <!-- TELA ESCOLHA ALUNO OU RESPONSÁVEL -->
+    <!-- TELA ESCOLHA ALUNO / RESPONSÁVEL -->
     <div id="role-screen" class="screen">
-        <div class="form-container" style="margin-top: 100px;">
+        <div class="form-container" style="margin-top: 80px;">
             <h2>Quem está acessando?</h2>
+            
             <button onclick="escolherRole('aluno')" class="btn-primary" style="padding:18px; font-size:18px; margin:15px 0;">
                 👨‍🎓 Sou Aluno
             </button>
             <button onclick="escolherRole('responsavel')" class="btn-secondary" style="padding:18px; font-size:18px; margin:15px 0;">
                 👨‍👩‍👧 Sou Responsável
             </button>
+            
+            <!-- Botão de Voltar bem destacado -->
+            <button onclick="voltarInicial()" class="btn-back">← Voltar</button>
         </div>
     </div>
 
-    <!-- DASHBOARD ALUNO (parecido com App Escola Paraná) -->
+    <!-- DASHBOARD ALUNO -->
     <div id="aluno-dashboard" class="screen">
-        <div class="dashboard-header">
+        <div style="background:var(--primary); padding:20px; text-align:center; border-radius:0 0 20px 20px;">
             <h2>Olá, <span id="aluno-nome"></span>!</h2>
             <p id="aluno-email" style="opacity:0.9;"></p>
         </div>
         
         <div style="padding:20px;">
-            <!-- Boletim -->
-            <div class="card">
-                <h3>📊 Boletim - 2º Trimestre 2026</h3>
-                <table>
+            <div style="background:white; color:#333; border-radius:16px; padding:20px; margin-bottom:20px;">
+                <h3>📊 Boletim - 2º Trimestre</h3>
+                <table style="width:100%; margin-top:10px;">
                     <tr><th>Disciplina</th><th>Nota</th></tr>
-                    <tr><td>Matemática</td><td style="color:#003087; font-weight:bold;">8,5</td></tr>
-                    <tr><td>Português</td><td style="color:#003087; font-weight:bold;">9,2</td></tr>
-                    <tr><td>História</td><td style="color:#003087; font-weight:bold;">7,8</td></tr>
-                    <tr><td>Ciências</td><td style="color:#003087; font-weight:bold;">8,9</td></tr>
+                    <tr><td>Matemática</td><td style="color:#003087;font-weight:bold;">8,5</td></tr>
+                    <tr><td>Português</td><td style="color:#003087;font-weight:bold;">9,2</td></tr>
+                    <tr><td>História</td><td style="color:#003087;font-weight:bold;">7,8</td></tr>
                 </table>
             </div>
             
-            <!-- Frequência -->
-            <div class="card">
-                <h3>📅 Frequência</h3>
-                <p style="font-size:52px; text-align:center; color:#28a745; margin:15px 0;">96%</p>
-                <p style="text-align:center;">Excelente frequência!</p>
+            <div style="background:white; color:#333; border-radius:16px; padding:20px;">
+                <h3>📅 Frequência: <span style="color:#28a745;">96%</span></h3>
             </div>
-            
-            <!-- Avisos -->
-            <div class="card">
-                <h3>📢 Avisos</h3>
-                <p><strong>Reunião de pais:</strong> 08/04/2026 às 19h</p>
-                <p><strong>Prova de Matemática:</strong> 02/04/2026</p>
-            </div>
-        </div>
-        
-        <!-- Navegação inferior -->
-        <div class="nav-bottom">
-            <div class="nav-item active">🏠<br>Início</div>
-            <div class="nav-item">📊<br>Boletim</div>
-            <div class="nav-item">📅<br>Agenda</div>
-            <div class="nav-item">📌<br>Freq.</div>
         </div>
     </div>
 
     <script>
         let usuarioLogado = null;
+        let lastActivityTime = Date.now();
 
         // Mostrar tela
         function mostrarTela(id) {
@@ -270,17 +246,35 @@
                 setTimeout(() => {
                     document.getElementById('splash').style.display = 'none';
                     
-                    // Verifica se já tem login salvo
-                    const ultimoEmail = localStorage.getItem('ultimoEmailEscola');
-                    if (ultimoEmail) {
-                        document.getElementById('login-email').value = ultimoEmail;
-                        mostrarTela('login-screen');
-                    } else {
+                    // Verifica tempo desde última atividade
+                    const tempoFora = (Date.now() - lastActivityTime) / 1000;
+                    
+                    if (tempoFora > 20) {
+                        // Mais de 20 segundos fora → força digitar e-mail novamente
+                        document.getElementById('login-email').value = '';
                         mostrarTela('initial-screen');
+                    } else {
+                        const ultimoEmail = localStorage.getItem('ultimoEmailEscola');
+                        if (ultimoEmail) {
+                            document.getElementById('login-email').value = ultimoEmail;
+                            mostrarTela('login-screen');
+                        } else {
+                            mostrarTela('initial-screen');
+                        }
                     }
                 }, 1000);
             }, 5000);
         };
+
+        // Atualiza tempo de atividade sempre que o usuário interage
+        function atualizarAtividade() {
+            lastActivityTime = Date.now();
+        }
+
+        // Adiciona listeners de atividade
+        document.addEventListener('click', atualizarAtividade);
+        document.addEventListener('keypress', atualizarAtividade);
+        document.addEventListener('scroll', atualizarAtividade);
 
         function voltarInicial() {
             mostrarTela('initial-screen');
@@ -294,7 +288,14 @@
             mostrarTela('login-screen');
         }
 
-        // Registrar usuário
+        // Mostrar / Esconder senha
+        function togglePassword(id) {
+            const input = document.getElementById(id);
+            const isPassword = input.type === 'password';
+            input.type = isPassword ? 'text' : 'password';
+        }
+
+        // Registrar
         function registrarUsuario() {
             const email = document.getElementById('reg-email').value.trim();
             const senha = document.getElementById('reg-senha').value;
@@ -323,7 +324,7 @@
             mostrarTela('login-screen');
         }
 
-        // Fazer Login
+        // Login
         function fazerLogin() {
             const email = document.getElementById('login-email').value.trim();
             const senha = document.getElementById('login-senha').value;
@@ -339,13 +340,14 @@
             if (user && user.senha === senha) {
                 usuarioLogado = user;
                 localStorage.setItem('ultimoEmailEscola', email);
+                atualizarAtividade();
                 mostrarTela('role-screen');
             } else {
                 alert('E-mail ou senha incorretos!');
             }
         }
 
-        // Escolher Aluno ou Responsável
+        // Escolher perfil
         function escolherRole(role) {
             if (role === 'aluno') {
                 document.getElementById('aluno-nome').textContent = usuarioLogado.nome || 'Aluno';
@@ -354,9 +356,10 @@
             } else {
                 alert('Dashboard do Responsável será adicionado em breve.');
             }
+            atualizarAtividade();
         }
 
-        // Enter no campo de senha
+        // Enter no login
         document.getElementById('login-senha').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') fazerLogin();
         });
