@@ -69,7 +69,7 @@
         
         input {
             width: 100%;
-            padding: 15px 48px 15px 15px;   /* espaço para o olho no canto */
+            padding: 15px 15px 15px 15px;           /* sem padding extra à direita */
             border: 2px solid #ddd;
             border-radius: 10px;
             font-size: 16px;
@@ -77,20 +77,25 @@
         
         .toggle-password {
             position: absolute;
-            right: 8px;           /* bem no cantinho direito */
+            right: 12px;
             top: 50%;
             transform: translateY(-50%);
-            background: none;
-            border: none;
-            font-size: 26px;
+            width: 40px;               /* área reservada como no quadrado */
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 22px;
             cursor: pointer;
-            color: #777;
-            padding: 6px 10px;
-            z-index: 30;          /* alta prioridade */
-            pointer-events: all;
+            color: #555;
+            z-index: 25;
         }
         
         .toggle-password:hover {
+            background: #e9ecef;
             color: var(--primary);
         }
 
@@ -255,7 +260,6 @@
             mostrarTela('login-screen');
         }
 
-        // Função do olho - corrigida
         function togglePassword(id) {
             const input = document.getElementById(id);
             input.type = (input.type === 'password') ? 'text' : 'password';
