@@ -69,7 +69,7 @@
         
         input {
             width: 100%;
-            padding: 15px 50px 15px 15px;   /* espaço maior para o olho */
+            padding: 15px 48px 15px 15px;   /* espaço para o olho no canto */
             border: 2px solid #ddd;
             border-radius: 10px;
             font-size: 16px;
@@ -77,16 +77,16 @@
         
         .toggle-password {
             position: absolute;
-            right: 15px;
+            right: 8px;           /* bem no cantinho direito */
             top: 50%;
             transform: translateY(-50%);
             background: none;
             border: none;
-            font-size: 24px;
+            font-size: 26px;
             cursor: pointer;
-            color: #666;
-            padding: 8px;
-            z-index: 20;                    /* ← Isso resolve o problema */
+            color: #777;
+            padding: 6px 10px;
+            z-index: 30;          /* alta prioridade */
             pointer-events: all;
         }
         
@@ -195,7 +195,7 @@
 
     <!-- DASHBOARD ALUNO -->
     <div id="aluno-dashboard" class="screen">
-        <div class="dashboard-header" style="background:#003087; padding:15px; text-align:center; border-radius:0 0 15px 15px; margin-bottom:20px;">
+        <div style="background:#003087; padding:15px; text-align:center; border-radius:0 0 15px 15px; margin-bottom:20px;">
             <div style="display:flex; justify-content:space-between; align-items:center; color:white;">
                 <button onclick="voltarParaRole()" style="background:none;border:none;color:white;font-size:26px;cursor:pointer;">←</button>
                 <span id="aluno-email-header" style="font-size:15px;opacity:0.9;"></span>
@@ -240,10 +240,22 @@
             mostrarTela('initial-screen');
         }
 
-        function mostrarRegistro() { mostrarTela('register-screen'); }
-        function mostrarLogin() { mostrarTela('login-screen'); }
+        function mostrarRegistro() {
+            const ultimoEmail = localStorage.getItem('ultimoEmailEscola');
+            if (ultimoEmail) document.getElementById('reg-email').value = ultimoEmail;
+            document.getElementById('reg-senha').value = '';
+            document.getElementById('reg-conf-senha').value = '';
+            mostrarTela('register-screen');
+        }
 
-        // Função do olho - agora com z-index alto
+        function mostrarLogin() {
+            const ultimoEmail = localStorage.getItem('ultimoEmailEscola');
+            if (ultimoEmail) document.getElementById('login-email').value = ultimoEmail;
+            document.getElementById('login-senha').value = '';
+            mostrarTela('login-screen');
+        }
+
+        // Função do olho - corrigida
         function togglePassword(id) {
             const input = document.getElementById(id);
             input.type = (input.type === 'password') ? 'text' : 'password';
@@ -255,15 +267,15 @@
             const conf = document.getElementById('reg-conf-senha').value;
 
             if (!email.endsWith('@escola.pr.gov.br')) return alert('O e-mail deve terminar com @escola.pr.gov.br');
-            if (senha.length < 6) return alert('Senha deve ter no mínimo 6 caracteres');
+            if (senha.length < 6) return alert('A senha deve ter no mínimo 6 caracteres');
             if (senha !== conf) return alert('As senhas não coincidem');
 
             let usuarios = JSON.parse(localStorage.getItem('usuariosEscola')) || {};
-            usuarios[email] = { email, senha, nome: email.split('@')[0] };
+            usuarios[email] = { email: email, senha: senha, nome: email.split('@')[0] };
             localStorage.setItem('usuariosEscola', JSON.stringify(usuarios));
             localStorage.setItem('ultimoEmailEscola', email);
 
-            alert('Conta criada com sucesso!');
+            alert('✅ Conta criada com sucesso!\nAgora faça login.');
             document.getElementById('login-email').value = email;
             mostrarTela('login-screen');
         }
