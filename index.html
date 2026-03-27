@@ -69,7 +69,7 @@
         
         input {
             width: 100%;
-            padding: 15px 15px 15px 15px;           /* sem padding extra à direita */
+            padding: 15px 58px 15px 15px;
             border: 2px solid #ddd;
             border-radius: 10px;
             font-size: 16px;
@@ -77,21 +77,21 @@
         
         .toggle-password {
             position: absolute;
-            right: 12px;
+            right: 10px;
             top: 50%;
             transform: translateY(-50%);
-            width: 40px;               /* área reservada como no quadrado */
-            height: 40px;
+            width: 42px;
+            height: 42px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #f8f9fa;
+            background: #f1f3f5;
             border: 2px solid #ddd;
             border-radius: 8px;
-            font-size: 22px;
+            font-size: 24px;
             cursor: pointer;
             color: #555;
-            z-index: 25;
+            z-index: 30;
         }
         
         .toggle-password:hover {
@@ -265,21 +265,40 @@
             input.type = (input.type === 'password') ? 'text' : 'password';
         }
 
+        // ====================== REGISTRO COM VERIFICAÇÃO ======================
         function registrarUsuario() {
             const email = document.getElementById('reg-email').value.trim();
             const senha = document.getElementById('reg-senha').value;
             const conf = document.getElementById('reg-conf-senha').value;
 
-            if (!email.endsWith('@escola.pr.gov.br')) return alert('O e-mail deve terminar com @escola.pr.gov.br');
-            if (senha.length < 6) return alert('A senha deve ter no mínimo 6 caracteres');
-            if (senha !== conf) return alert('As senhas não coincidem');
+            if (!email.endsWith('@escola.pr.gov.br')) {
+                return alert('O e-mail deve terminar com @escola.pr.gov.br');
+            }
+            if (senha.length < 6) {
+                return alert('A senha deve ter no mínimo 6 caracteres');
+            }
+            if (senha !== conf) {
+                return alert('As senhas não coincidem');
+            }
 
+            // Verifica se o e-mail já existe
             let usuarios = JSON.parse(localStorage.getItem('usuariosEscola')) || {};
-            usuarios[email] = { email: email, senha: senha, nome: email.split('@')[0] };
+            
+            if (usuarios[email]) {
+                return alert('❌ Esta conta já existe!\nUse a opção "Fazer Login".');
+            }
+
+            // Cria a conta
+            usuarios[email] = { 
+                email: email, 
+                senha: senha, 
+                nome: email.split('@')[0] 
+            };
+            
             localStorage.setItem('usuariosEscola', JSON.stringify(usuarios));
             localStorage.setItem('ultimoEmailEscola', email);
 
-            alert('✅ Conta criada com sucesso!\nAgora faça login.');
+            alert('✅ Conta criada com sucesso!\nAgora você pode fazer login.');
             document.getElementById('login-email').value = email;
             mostrarTela('login-screen');
         }
@@ -288,7 +307,9 @@
             const email = document.getElementById('login-email').value.trim();
             const senha = document.getElementById('login-senha').value;
 
-            if (!email.endsWith('@escola.pr.gov.br')) return alert('Use um e-mail @escola.pr.gov.br');
+            if (!email.endsWith('@escola.pr.gov.br')) {
+                return alert('Use um e-mail @escola.pr.gov.br');
+            }
 
             const usuarios = JSON.parse(localStorage.getItem('usuariosEscola')) || {};
             const user = usuarios[email];
